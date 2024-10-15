@@ -44,6 +44,12 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'basset' => [
+            'driver' => 'local',
+            'root' => storage_path('backpack/basset'),
+            'url' => env('APP_URL').'/basset',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',
