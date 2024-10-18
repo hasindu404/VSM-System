@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('customerID');
             $table->string('appointmentStatus');
             $table->string('serviceType');
-            $table->date('appoinmentDate');
+            $table->date('appointmentDate');
             $table->enum('employerType', ['customer', 'receptionist'])->default('customer');
             $table->time('timeSlot');
             $table->timestamps();
