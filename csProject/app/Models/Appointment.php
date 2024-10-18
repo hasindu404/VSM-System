@@ -15,7 +15,7 @@ class Appointment extends Model
         'customerID',
         'appointmentStatus',
         'serviceType',
-        'appoinmentDate',
+        'appointmentDate',
         'employerType',
         'timeSlot'
 

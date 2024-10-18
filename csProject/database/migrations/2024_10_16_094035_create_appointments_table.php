@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->string('customerID');
+            $table->integer('customerID');
             $table->string('appointmentStatus');
             $table->string('serviceType');
             $table->date('appointmentDate');
-            $table->enum('employerType', ['customer', 'receptionist'])->default('customer');
+            $table->string('employerType');
+            // $table->enum('employerType', ['customer', 'receptionist'])->default('customer');
             $table->time('timeSlot');
             $table->timestamps();
         });
