@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('business_hours', function (Blueprint $table) {
             $table->id();
             $table->enum('dayOfWeek', ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])->notNullable();
-            $table->time('openingTime')->notNullable();
-            $table->time('closingTime')->notNullable();
+            $table->time('openingTime')->nullable();
+            $table->time('closingTime')->nullable();
             $table->boolean('isOpen')->default(true);
             $table->timestamps();
         });
