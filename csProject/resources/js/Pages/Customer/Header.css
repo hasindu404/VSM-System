@@ -1,5 +1,5 @@
 .header {
-    background-color: #3498db; /* Change this to your desired color */
+    background-color: #042338; /* Change this to your desired color */
     height: 100px; /* Set the desired height */
     width: 100%;
     position: fixed;
@@ -41,4 +41,20 @@
   .header nav ul li a:hover {
     text-decoration: underline; /* Optional hover effect */
   }
+
+  .customer-info {
+    color: #fdf8f8;            /* Dark text color */
+    margin-top: 8px;       /* Space above the customer info */
+}
+
+.customer-name {
+    font-size: 16px;        /* Font size for customer name */
+    margin: 0;             /* Remove default margin */
+}
+
+.customer-role {
+    font-size: 14px;        /* Font size for customer role */
+    margin: 0;             /* Remove default margin */
+}
+
   

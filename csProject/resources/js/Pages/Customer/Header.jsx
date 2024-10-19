@@ -9,9 +9,16 @@ const Header = () => {
         <h1>Your Logo</h1>
         <nav>
           <ul>
-            <li><a href="/"><FaUser style={{ marginRight: '8px' , fontSize: '25px', verticalAlign: 'middle'}} /> {/* Customer icon here */}</a></li>
-            <p>Customer name</p>
-            <p>Customer</p>
+          <li>
+            <a href="/">
+                <FaUser style={{ marginRight: '14px', fontSize: '25px', marginTop: '14px' }}  /> 
+                {/* Customer icon here */}
+            </a>
+</li>
+            <div className="customer-info">
+                <p className="customer-name">Customer name</p>
+                 <p className="customer-role">Customer</p>
+            </div>
           </ul>
         </nav>
       </div>
