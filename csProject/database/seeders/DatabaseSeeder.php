@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Call the BusinessHoursSeeder to seed business hours data
+        $this->call(BusinessHoursSeeder::class);
+        
     }
 }
