@@ -25,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/CustomerDashboard', function () {
+    return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
+})->name('CustomerDashboard');
+
 Route::get('/create', function () {
     return Inertia::render('Appointments/Create'); // Ensure the casing matches
 })->name('create');
