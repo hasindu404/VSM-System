@@ -1,0 +1,19 @@
+.dashboard-container {
+    display: flex;
+}
+
+.content-area {
+    margin-left: 250px; /* Sidebar width */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+}
