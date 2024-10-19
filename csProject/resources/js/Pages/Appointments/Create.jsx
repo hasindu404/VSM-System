@@ -4,6 +4,10 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Sidebar from '../Customer/Sidebar';  // Relative path to Sidebar.jsx
+import Header from '../Customer/Header';    // Relative path to Header.jsx
+
+
 
 export default function CreateAppointment() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -25,6 +29,8 @@ export default function CreateAppointment() {
 
     return (
         <GuestLayout>
+        <Header/>
+        <Sidebar/>
             <Head title="Create Appointment" />
 
             <form onSubmit={submit}>
@@ -128,7 +134,7 @@ export default function CreateAppointment() {
 
                 <div className="mt-4 flex items-center justify-end">
                     <Link
-                        href={route('dashboard')}
+                        href={route('CustomerDashboard')}
                         className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                         Go to Dashboard
