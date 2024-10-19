@@ -19,16 +19,7 @@ export default function Sidebar() {
                     <Link href="/service-history" className="nav-link">Service History</Link>
                 </li>
                 <li>
-                    <Link href="/offers" className="nav-link">Service Packages/Offers</Link>
-                </li>
-                <li>
                     <Link href="/reminders" className="nav-link">Reminders</Link>
-                </li>
-                <li>
-                    <Link href="/billing" className="nav-link">Billing & Payments</Link>
-                </li>
-                <li>
-                    <Link href="/support" className="nav-link">Support</Link>
                 </li>
                 <li>
                     <Link href="/settings" className="nav-link">Settings</Link>
