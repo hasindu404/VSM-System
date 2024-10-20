@@ -11,7 +11,7 @@ export default function Dashboard() {
             <Sidebar /> 
             <div className="content-area">
                 <h1>Dashboard</h1>
-                <p>Welcome to your dashboard! Here you can manage your vehicles, appointments, and more.</p>
+                <p>Welcome to Customer dashboard! Here you can manage your vehicles, appointments, and more.</p>
                 {/* Add other dashboard-specific content here */}
             </div>
         </div>
