@@ -1,12 +1,15 @@
 import React from 'react';
 import './Header.css'; // Import your custom CSS file
 import { FaUser } from 'react-icons/fa'; // Import the User icon
+import logo from '@/assests/logo.png';
 
 const Header = () => {
   return (
     <header className="header">
       <div className="header-content">
-        <h1>Your Logo</h1>
+      <div>
+        <img src={logo} alt="logo" className="header-logo" />
+        </div>
         <nav>
           <ul>
           <li>
