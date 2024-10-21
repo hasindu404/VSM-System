@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,6 +19,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/custmang',[CustomerController::class,'index'])->name('customer.custmang');
+Route::post('/custmang',[CustomerController::class, 'store'])->name('customer.store');
+Route::get('/custmang/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('/custmang/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
+Route::delete('/custmang/{customer}/delete',[CustomerController::class, 'delete'])->name('customer.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
