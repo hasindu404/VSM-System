@@ -5,6 +5,7 @@ import Header from './Header'; // Import the Header component
 
 export default function Dashboard() {
     return (
+        
         <div className="dashboard-container">
              {/* Header Component */}
             <Header />
@@ -15,5 +16,6 @@ export default function Dashboard() {
                 {/* Add other dashboard-specific content here */}
             </div>
         </div>
+        
     );
 }
