@@ -58,7 +58,7 @@
 }
 
 .header-logo {
-  width: 140px;           /* Set the desired width */
-  height: 100px;          /* Maintain aspect ratio */
+  width: 200px;           /* Set the desired width */
+  height: 200px;          /* Maintain aspect ratio */
   margin-left: auto;     /* Push logo to the right */
 }
