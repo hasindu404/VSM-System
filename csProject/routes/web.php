@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BusinessHourController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/custmang',[CustomerController::class,'index'])->name('customer.custmang');
+Route::post('/custmang',[CustomerController::class, 'store'])->name('customer.store');
+Route::get('/custmang/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('/custmang/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
+Route::delete('/custmang/{customer}/delete',[CustomerController::class, 'delete'])->name('customer.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -57,8 +64,3 @@ require __DIR__.'/auth.php';
 
 //Appointments 
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
-
-//BusinessHours
-// Route::get('/business-hours', [BusinessHourController::class, 'index']);
-Route::put('/business-hours', [BusinessHourController::class, 'update']);
-// Route::post('/business-hours', [BusinessHourController::class, 'store']);
