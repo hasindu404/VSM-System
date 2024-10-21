@@ -62,38 +62,16 @@ export default function CreateAppointment() {
     const submit = (e) => {
         e.preventDefault();
     
-        post(route('appointments'), 
-            {
-                appointmentStatus: data.appointmentStatus,
-                serviceType: data.serviceType,
-                appointmentDate: data.appointmentDate,
-                timeSlot: data.timeSlot,
-            },
-            {
-                onSuccess: () => {
-                    toast.success('Appointment created successfully!');
-                    reset('appointmentStatus', 'serviceType', 'appointmentDate', 'timeSlot');
-                },
-                onError: (error) => {
-                    // Log the error to ensure we're getting the response
-                    console.log(error.response); // Add this line to inspect the error in your browser's console
-                    
-                    // Check if we received a valid error response from the server
-                    const errorType = error?.response?.data?.errorType;
-                    const message = error?.response?.data?.message || 'An error occurred. Please try again.';
-    
-                    // Handle different error types separately
-                    if (errorType === 'business_day') {
-                        toast.error('Business is closed on this day.');
-                    } else if (errorType === 'business_hours') {
-                        toast.error('Appointment time is outside of business hours.');
-                    } else {
-                        toast.error(message);
-                    }
-                }
+        post(route('appointments.store'), {
+          onSuccess: (page) => {
+            if (page.props.flash.success) {
+              toast.success(page.props.flash.success);
+            } else if (page.props.flash.error) {
+              toast.error(page.props.flash.error);
             }
-        );
-    };
+          },
+        });
+      };
     
     
 
