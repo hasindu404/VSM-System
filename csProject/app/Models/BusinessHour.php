@@ -12,10 +12,11 @@ class BusinessHour extends Model
     protected $table = 'business_hours';
 
     protected $fillable =[
-        'dayOfWeek',
         'openingTime',
         'closingTime',
-        'isOpen'
+        'isOpen',
 
     ];
+
+    protected $guarded = ['dayOfWeek'];
 }

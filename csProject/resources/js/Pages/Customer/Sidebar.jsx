@@ -8,7 +8,7 @@ export default function Sidebar() {
         <div className="sidebar">
             <ul>
                 <li>
-                    <Link href="/dashboard" className="nav-link">
+                    <Link href="CustomerDashboard" className="nav-link">
                         <FaBeer style={{ color: 'gold', fontSize: '20px', marginRight: '8px' }} />
                         Dashboard
                     </Link>
@@ -44,7 +44,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/logout" className="nav-link">
+                    <Link href="login" className="nav-link">
                         <FaSignOutAlt style={{ color: 'red', fontSize: '20px', marginRight: '8px' }} />
                         Logout
                     </Link>

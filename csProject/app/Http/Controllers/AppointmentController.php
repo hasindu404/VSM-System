@@ -31,21 +31,32 @@ class AppointmentController extends Controller
         $businessHour = BusinessHour::where('dayOfWeek', $dayOfWeek)->first(); // Fetching business hours
 
         // Check if the business is open on that day
-        if (!$businessHour || !$businessHour->isOpen) { // Business closed check
-            return response()->json(['error' => 'Business is closed on this day.'], 400);
-        }
+       // If business is closed on the selected day
+if (!$businessHour || !$businessHour->isOpen) {
+    return response()->json([
+        'errorType' => 'business_day',
+        'message' => 'Business is closed on this day.'
+    ], 400); // 400 Bad Request
+}
 
-         // Check if the appointment time is within business hours
-         if ($appointmentTime->lt(Carbon::parse($businessHour->openingTime)) || // Time before opening
-         $appointmentTime->gt(Carbon::parse($businessHour->closingTime))) { // Time after closing
-         return response()->json(['error' => 'Appointment time is outside of business hours.'], 400);
-     }
+// If appointment time is outside business hours
+if ($appointmentTime->lt(Carbon::parse($businessHour->openingTime)) || 
+    $appointmentTime->gt(Carbon::parse($businessHour->closingTime))) {
+    return response()->json([
+        'errorType' => 'business_hours',
+        'message' => 'Appointment time is outside of business hours.'
+    ], 422); // 422 Unprocessable Entity
+}
 
         // Create a new appointment
         $appointment = Appointment::create($validatedData);
 
          // Optionally, return a response or redirect
-        return redirect()->route('login')->with('success', 'Appointment created successfully!');
+        //  return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
+
+        if ($appointmentTime->gte(Carbon::parse($businessHour->openingTime)) && $appointmentTime->lte(Carbon::parse($businessHour->closingTime))) {
+            return back()->with('success', 'Appointment time is within business hours.');
+        }
         // return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.']);
         
 
