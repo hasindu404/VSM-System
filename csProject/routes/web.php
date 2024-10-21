@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,4 +25,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/CustomerDashboard', function () {
+    return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
+})->name('CustomerDashboard');
+
+Route::get('/AdminDashboard', function () {
+    return Inertia::render('Admin/AdminDashboard'); // Ensure the casing matches
+})->name('AdminDashboard');
+
+Route::get('/create', function () {
+    return Inertia::render('Appointments/Create'); // Ensure the casing matches
+})->name('create');
+
+
 require __DIR__.'/auth.php';
+
+
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
