@@ -14,9 +14,9 @@ class Vehical extends Model
         'vehicalid',
         'brand',
         'year',
-        'Catagory',
+        'catagory',
         'last_service_date',
         'colour',
-       
+        
     ];
 }
