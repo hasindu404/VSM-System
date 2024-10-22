@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6468736acd2f6991486614022276a4d8",
+    "content-hash": "84f551be187c6d26834b24c1a45d165d",
     "packages": [
         {
             "name": "backpack/basset",
@@ -82,16 +82,16 @@
         },
         {
             "name": "backpack/crud",
-            "version": "6.7.40",
+            "version": "6.7.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/CRUD.git",
-                "reference": "9ed23aa14c8c6b813e5927e6adbe971d5de93994"
+                "reference": "ac35070c94c3db7ceb7680b5eb7307cac56eea74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/9ed23aa14c8c6b813e5927e6adbe971d5de93994",
-                "reference": "9ed23aa14c8c6b813e5927e6adbe971d5de93994",
+                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/ac35070c94c3db7ceb7680b5eb7307cac56eea74",
+                "reference": "ac35070c94c3db7ceb7680b5eb7307cac56eea74",
                 "shasum": ""
             },
             "require": {
@@ -170,9 +170,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Backpack/CRUD/issues",
-                "source": "https://github.com/Laravel-Backpack/CRUD/tree/6.7.40"
+                "source": "https://github.com/Laravel-Backpack/CRUD/tree/6.7.41"
             },
-            "time": "2024-10-08T09:46:42+00:00"
+            "time": "2024-10-15T14:05:11+00:00"
         },
         {
             "name": "backpack/theme-coreuiv4",
