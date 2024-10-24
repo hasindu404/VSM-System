@@ -14,10 +14,10 @@ const Header = () => {
           <ul>
           <li>
             <a href="/">
-                <FaUser style={{ marginRight: '14px', fontSize: '25px', marginTop: '14px' }}  /> 
+                <FaUser style={{ marginRight: '14px', fontSize: '25px', marginTop: '14px' }}  />
                 {/* Customer icon here */}
             </a>
-</li>
+           </li>
             <div className="customer-info">
                 <p className="customer-name">Customer name</p>
                  <p className="customer-role">Customer</p>

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/service', function () {
+    return Inertia::render('Footer'); // Ensure the casing matches
+})->name('Footer');
+
 Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
 })->name('CustomerDashboard');
@@ -67,8 +71,13 @@ Route::get('/create', function () {
     return Inertia::render('Appointments/Create'); // Ensure the casing matches
 })->name('create');
 
+Route::get('/personal', function () {
+    return Inertia::render('Customer/Personalinfo'); // Ensure the casing matches
+})->name('Customer.Personalinfo');
+
+
 
 require __DIR__.'/auth.php';
 
-//Appointments 
+//Appointments
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
