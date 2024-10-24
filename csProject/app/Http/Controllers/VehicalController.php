@@ -17,8 +17,8 @@ public function store(Request $request){
         'vehicalid'=> 'required',
         'brand'=> 'required',
         'year'=> 'required',
-        'Catagory'=>'required',
-        'last_service_date' => 'required',
+        'catagory'=>'required',
+        'last_service_date' => 'required|date',
         'colour'=>'required',
     ]);
     $newVehical = Vehical::create($data);
@@ -35,7 +35,7 @@ public function update(Vehical $vehical,Request $request){
         'vehicalid'=> 'required',
         'brand'=> 'required',
         'year'=> 'required',
-        'Catagory'=>'required',
+        'catagory'=>'required',
         'last_service_date' => 'required',
         'colour'=>'required',
     ]);
