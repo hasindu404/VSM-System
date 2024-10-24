@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css'; // Import your custom CSS file
 import { FaUser } from 'react-icons/fa'; // Import the User icon
-import logo from '@/assests/logo.png';
+import logo from '@/assets/logo.png'
 
 const Header = () => {
   return (
