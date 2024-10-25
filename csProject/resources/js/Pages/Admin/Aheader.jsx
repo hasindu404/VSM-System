@@ -1,7 +1,7 @@
 import React from 'react';
 import '@/Pages/Customer/Header.css'; // Import your custom CSS file
 import { FaUser } from 'react-icons/fa'; // Import the User icon
-import logo from '@/assests/logo.png';
+import logo from '@/assets/logo.png'
 
 const Header = () => {
   return (
@@ -14,7 +14,7 @@ const Header = () => {
           <ul>
           <li>
             <a href="/">
-                <FaUser style={{ marginRight: '14px', fontSize: '25px', marginTop: '14px' }}  /> 
+                <FaUser style={{ marginRight: '14px', fontSize: '25px', marginTop: '14px' }}  />
                 {/* Customer icon here */}
             </a>
 </li>

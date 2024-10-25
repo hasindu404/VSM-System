@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/custmang',[CustomerController::class,'index'])->name('customer.custmang');
+Route::get('/custmang',[CustomerController::class,'index'])->name('customer.index');
 Route::post('/custmang',[CustomerController::class, 'store'])->name('customer.store');
 Route::get('/custmang/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
 Route::put('/custmang/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
@@ -41,9 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/service', function () {
-    return Inertia::render('Footer'); // Ensure the casing matches
-})->name('Footer');
 
 Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
@@ -73,9 +70,13 @@ Route::get('/create', function () {
 
 Route::get('/personal', function () {
     return Inertia::render('Customer/Personalinfo'); // Ensure the casing matches
-})->name('Customer.Personalinfo');
+})->name('profile');
 
+Route::post('/profile', [CustomerController::class, 'store'])->name('personalinfo');
 
+Route::get('/service',function(){
+    return Inertia::render('Customer/ServiceHistory');
+})->name('service');
 
 require __DIR__.'/auth.php';
 

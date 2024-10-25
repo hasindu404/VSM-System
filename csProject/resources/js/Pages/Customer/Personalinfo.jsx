@@ -11,7 +11,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 
 
 export default function Personalinfo(){
-    const {data, setData, post, processing, errors, reset} = useForm({
+    const {data, setData, post, processing } = useForm({
             fname: '',
             lnamee: '',
             address: '',
@@ -21,7 +21,12 @@ export default function Personalinfo(){
     });
     const submit = (e) =>{
         e.preventDefault();
-            post(route('customers.store'));
+            post(route('/profile'),{
+                onSuccess:() => {
+                    onSuccess();
+                    setData({fname:'',lname:'',address:'',contact:'',email:'',vehicleid:''})
+                }
+            });
     };
         return(
                 <GuestLayout>

@@ -36,8 +36,20 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className="flex space-x-2">
-                        <button type="button" className="border border-gray-400 text-gray-400 py-2 px-4 rounded hover:bg-gray-700 hover:text-white">Register</button>
-                        <button type="button" className="border border-yellow-400 text-yellow-400 py-2 px-4 rounded hover:bg-yellow-400 hover:text-gray-800">Login</button>
+
+                            <>
+                            <Link
+                            href={route('register')}
+                            type="button"
+                            className="border border-gray-400 text-gray-400 py-2 px-4 rounded hover:bg-gray-700 hover:text-white">Register</Link>
+                            </>
+                            <>
+                            <Link
+                            href={route('login')}
+                            type="button"
+                            className="border border-yellow-400 text-yellow-400 py-2 px-4 rounded hover:bg-yellow-400 hover:text-gray-800">Login</Link>
+                            </>
+
                     </div>
                 </div>
             </nav>
