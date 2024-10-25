@@ -61,7 +61,7 @@ export default function CreateAppointment() {
 
     const submit = (e) => {
         e.preventDefault();
-    
+
         post(route('appointments.store'), {
           onSuccess: (page) => {
             if (page.props.flash.success) {
@@ -72,8 +72,8 @@ export default function CreateAppointment() {
           },
         });
       };
-    
-    
+
+
 
     return (
         <GuestLayout>

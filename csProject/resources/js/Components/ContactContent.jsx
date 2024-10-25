@@ -2,6 +2,7 @@ import { Inertia } from '@inertiajs/inertia-react';
 import logo from "../assets/dpmc.jfif";
 import { FaFacebookF, FaGoogle, FaYoutube } from 'react-icons/fa';
 
+
 const ContactContent = () => {
     return (
         <div className="container mx-auto">
@@ -26,7 +27,9 @@ const ContactContent = () => {
                 </div>
                 <div className="md:w-1/2 mt-3 pt-5">
                     <img src={logo} alt="Shantha Engineering" />
+
                     <h3 className="text-2xl font-bold text-yellow-500">Shantha Engineering (PVT) Ltd.</h3>
+
                     <p className="flex items-center">
                         <i className="fas fa-home me-2" /> No:520, Tangalle Road, Welewatta, Mathara
                     </p>
@@ -39,8 +42,6 @@ const ContactContent = () => {
                     <p className="flex items-center">
                         <i className="fas fa-phone me-2" />Fax: 041-2227703
                     </p>                 
-
-
                 </div>
             </div>
             <div className="bg-black p-5 mt-5 mb-5 border">
@@ -53,8 +54,8 @@ const ContactContent = () => {
                         <li>
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white">
                             <FaFacebookF />
-                                            </a>
-                            
+                        </a>
+                         
                         </li>
                         <li>
                         <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="text-white">

@@ -3,13 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\VehicalController;
 use App\Http\Controllers\BusinessHourController;
+use App\Models\Vehical;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -21,11 +23,17 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/custmang',[CustomerController::class,'index'])->name('customer.custmang');
+Route::get('/custmang',[CustomerController::class,'index'])->name('customer.index');
 Route::post('/custmang',[CustomerController::class, 'store'])->name('customer.store');
 Route::get('/custmang/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
 Route::put('/custmang/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
 Route::delete('/custmang/{customer}/delete',[CustomerController::class, 'delete'])->name('customer.delete');
+
+Route::get('/vehimang',[VehicalController::class,'index'])->name('vehical.vehimang');
+Route::post('/vehimang',[VehicalController::class, 'store'])->name('vehical.store');
+Route::get('/vehimang/{vehical}/edit',[VehicalController::class, 'edit'])->name('vehical.edit');
+Route::put('/vehimang/{vehical}/update',[VehicalController::class, 'update'])->name('vehical.update');
+Route::delete('/vehimang/{vehical}/delete',[VehicalController::class, 'delete'])->name('vehical.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,9 +41,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
 })->name('CustomerDashboard');
+
+Route::get('/Services', function () {
+    return Inertia::render('Service'); // Ensure the casing matches
+})->name('Services');
+
+Route::get('/Media', function () {
+    return Inertia::render('Media'); // Ensure the casing matches
+})->name('Media');
+
+Route::get('/About', function () {
+    return Inertia::render('About'); // Ensure the casing matches
+})->name('About');
+
+Route::get('/fullservice', function () {
+    return Inertia::render('Fullservice'); // Ensure the casing matches
+})->name('fullservice');
+Route::get('/normalservice', function () {
+    return Inertia::render('Normalservice'); // Ensure the casing matches
+})->name('normalservice');
 
 //Admin
 Route::get('/AdminDashboard', function () {
@@ -59,8 +87,17 @@ Route::get('/create', function () {
     return Inertia::render('Appointments/Create'); // Ensure the casing matches
 })->name('create');
 
+Route::get('/personal', function () {
+    return Inertia::render('Customer/Personalinfo'); // Ensure the casing matches
+})->name('profile');
+
+Route::post('/profile', [CustomerController::class, 'store'])->name('personalinfo');
+
+Route::get('/service',function(){
+    return Inertia::render('Customer/ServiceHistory');
+})->name('service');
 
 require __DIR__.'/auth.php';
 
-//Appointments 
+//Appointments
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
