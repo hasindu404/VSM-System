@@ -61,9 +61,14 @@ Route::get('/About', function () {
 Route::get('/fullservice', function () {
     return Inertia::render('Fullservice'); // Ensure the casing matches
 })->name('fullservice');
+
 Route::get('/normalservice', function () {
     return Inertia::render('Normalservice'); // Ensure the casing matches
 })->name('normalservice');
+
+Route::get('/ContactUs', function () {
+    return Inertia::render('Contact'); // Ensure the casing matches
+})->name('ContactUs');
 
 //Admin
 Route::get('/AdminDashboard', function () {

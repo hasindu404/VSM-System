@@ -3,16 +3,16 @@ import ServiceContent from "@/Components/ServiceContent"
 import Footer from "@/Components/Footer"
 import { Head } from "@inertiajs/react"
 
-const Home = () => {
+const Service = () => {
   return (
     <div>
         <Head/>
         <Header/>
         <ServiceContent/>
         <Footer/>
-        
+
     </div>
   )
 }
 
-export default Home
+export default Service

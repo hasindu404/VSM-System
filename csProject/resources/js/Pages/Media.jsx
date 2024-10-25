@@ -4,16 +4,16 @@ import Footer from "@/Components/Footer"
 import { Head } from "@inertiajs/react"
 import MediaContent from "@/Components/MediaContent"
 
-const Home = () => {
+const Media = () => {
   return (
     <div>
         <Head/>
         <Header/>
         <MediaContent/>
         <Footer/>
-        
+
     </div>
   )
 }
 
-export default Home
+export default Media
