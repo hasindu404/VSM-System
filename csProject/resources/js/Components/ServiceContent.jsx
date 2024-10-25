@@ -21,7 +21,7 @@ const ServiceContent = () => {
               alt="Full Service"
             />
             <div className="p-4">
-              <Link href="/Fullservice" className="block text-lg font-semibold text-gray-900 mb-2">
+              <Link href="/fullservice" className="block text-lg font-semibold text-gray-900 mb-2">
                 Full Service
               </Link>
               <p className="text-gray-700">Our experts are skilled to handle any major mechanical repair. We are armed with the best tools.</p>
@@ -35,7 +35,7 @@ const ServiceContent = () => {
               alt="Normal Service"
             />
             <div className="p-4">
-              <Link href="/Normalservice" className="block text-lg font-semibold text-gray-900 mb-2">
+              <Link href="/normalservice" className="block text-lg font-semibold text-gray-900 mb-2">
                 Normal Service
               </Link>
               <p className="text-gray-700">Our experts are skilled to handle any major mechanical repair. We are armed with the best tools.</p>
@@ -49,7 +49,7 @@ const ServiceContent = () => {
               alt="Request Service History"
             />
             <div className="p-4">
-              <Link href="#!" className="block text-lg font-semibold text-gray-900 mb-2">
+              <Link href="/login" className="block text-lg font-semibold text-gray-900 mb-2">
                 Request Service History
               </Link>
               <p className="text-gray-700">Get service information about the vehicle you need.</p>

@@ -46,6 +46,25 @@ Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
 })->name('CustomerDashboard');
 
+Route::get('/Services', function () {
+    return Inertia::render('Service'); // Ensure the casing matches
+})->name('Services');
+
+Route::get('/Media', function () {
+    return Inertia::render('Media'); // Ensure the casing matches
+})->name('Media');
+
+Route::get('/About', function () {
+    return Inertia::render('About'); // Ensure the casing matches
+})->name('About');
+
+Route::get('/fullservice', function () {
+    return Inertia::render('Fullservice'); // Ensure the casing matches
+})->name('fullservice');
+Route::get('/normalservice', function () {
+    return Inertia::render('Normalservice'); // Ensure the casing matches
+})->name('normalservice');
+
 //Admin
 Route::get('/AdminDashboard', function () {
     return Inertia::render('Admin/AdminDashboard'); // Ensure the casing matches

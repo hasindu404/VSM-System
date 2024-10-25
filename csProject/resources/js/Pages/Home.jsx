@@ -6,11 +6,11 @@ import { Head } from "@inertiajs/react"
 const Home = () => {
   return (
     <div>
-        <Head/>
+        <Head title="Shantha Engineering(PVT) .Ltd"/>
         <Header/>
         <MainContent/>
         <Footer/>
-        
+
     </div>
   )
 }
