@@ -49,7 +49,6 @@ const Header = () => {
                             type="button"
                             className="border border-yellow-400 text-yellow-400 py-2 px-4 rounded hover:bg-yellow-400 hover:text-gray-800">Login</Link>
                             </>
-
                     </div>
                 </div>
             </nav>
