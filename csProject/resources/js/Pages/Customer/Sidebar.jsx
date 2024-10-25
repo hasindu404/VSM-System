@@ -20,13 +20,13 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/appointments" className="nav-link">
+                    <Link href="/create" className="nav-link">
                         <FaCalendarAlt style={{ color: 'green', fontSize: '20px', marginRight: '8px' }} />
                         Appointments
                     </Link>
                 </li>
                 <li>
-                    <Link href="/service-history" className="nav-link">
+                    <Link href="/service" className="nav-link">
                         <FaHistory style={{ color: 'purple', fontSize: '20px', marginRight: '8px' }} />
                         Service History
                     </Link>
@@ -38,9 +38,9 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/settings" className="nav-link">
+                    <Link href="/personal" className="nav-link">
                         <FaCog style={{ color: 'grey', fontSize: '20px', marginRight: '8px' }} />
-                        Settings
+                        Profile
                     </Link>
                 </li>
                 <li>
