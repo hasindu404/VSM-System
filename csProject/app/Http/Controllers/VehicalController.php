@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Vehical;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class VehicalController extends Controller
 {
     public function index(){
-        $vehical = Vehical::all();
-        return view('vehical/vehimang',['vehicals'=> $vehical]);
+        $vehicals = Vehical::all();
+        return Inertia::render('vehical/vehimang',['vehical'=> $vehicals]);
 }
 public function store(Request $request){
     $data = ($request) ->validate([
@@ -23,11 +24,11 @@ public function store(Request $request){
     ]);
     $newVehical = Vehical::create($data);
 
-    return redirect(route('vehical.vehimang'));
+    return redirect(route('vehical.index'));
 }
 
 public function edit(Vehical $vehical){
-        return view('vehical.edit',['customer'=> $vehical]);
+        return view('vehical.edit',['vehical'=> $vehical]);
 }
 
 public function update(Vehical $vehical,Request $request){
