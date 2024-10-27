@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Admin/AdminDashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
@@ -109,9 +109,18 @@ Route::get('/service',function(){
 
 require __DIR__.'/auth.php';
 
+<<<<<<< Updated upstream
 //Appointments
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
 
 //admin auth
 Route::get('Admin/Dashboard',[HomeController::class, 'index'] );
+=======
+//Appointments 
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
+
+Route::put('/business-hours/update/{dayOfWeek}', [BusinessHoursController::class, 'update'])->name('business.hours.update');
+
+Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
+>>>>>>> Stashed changes
 
