@@ -17,6 +17,6 @@ class Vehical extends Model
         'Catagory',
         'last_service_date',
         'colour',
-       
+        'images',
     ];
 }

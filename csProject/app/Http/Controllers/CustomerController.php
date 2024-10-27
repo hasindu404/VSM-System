@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Inertia\Inertia;
 
 class CustomerController extends Controller
 {
     public function index(){
         $customers = Customer::all();
-        return view('customer/custmang',['customers'=> $customers]);
+        return Inertia::render('Customers/Personalinfo', ['customer' => $customers]);
 }
 public function store(Request $request){
     $data = ($request) ->validate([
@@ -22,7 +23,7 @@ public function store(Request $request){
     ]);
     $newCustomer = Customer::create($data);
 
-    return redirect(route('customer.custmang'));
+    return redirect() -> route('profile');
 }
 
 public function edit(Customer $customer){
@@ -39,7 +40,7 @@ public function update(Customer $customer,Request $request){
         'vehicleid'=>'required',
     ]);
     $customer->update($data);
-    return redirect(route('customer.custmang'));
+    return redirect(route('profile'));
 }
 
 public function delete(Customer $customer){
