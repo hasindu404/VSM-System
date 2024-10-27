@@ -6,7 +6,7 @@ import { Head } from "@inertiajs/react"
 const Service = () => {
   return (
     <div>
-        <Head/>
+        <Head title="Services"/>
         <Header/>
         <ServiceContent/>
         <Footer/>

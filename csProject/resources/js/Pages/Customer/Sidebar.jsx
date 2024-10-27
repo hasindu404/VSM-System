@@ -14,7 +14,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/vehicles" className="nav-link">
+                    <Link href="/vehiclereg" className="nav-link">
                         <FaCar style={{ color: 'blue', fontSize: '20px', marginRight: '8px' }} />
                         My Vehicles
                     </Link>
