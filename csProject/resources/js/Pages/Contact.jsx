@@ -5,7 +5,7 @@ import ContactContent from "@/Components/ContactContent"
 const Contact = () => {
   return (
     <div>
-        <Head/>
+        <Head title="Contact Us"/>
         <Header/>
         <ContactContent/>
         <Footer/>
