@@ -17,7 +17,8 @@ class Appointment extends Model
         'serviceType',
         'appointmentDate',
         'employerType',
-        'timeSlot'
+        'appointmentTime',
+        'isFinished',
 
     ];
 }

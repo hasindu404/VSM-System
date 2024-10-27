@@ -17,6 +17,7 @@ return new class extends Migration
             $table->time('openingTime')->nullable();
             $table->time('closingTime')->nullable();
             $table->boolean('isOpen')->default(true);
+            $table->integer('step')->nullable()->default(30); // You can set a default step value, e.g., 30 minutes
             $table->timestamps();
         });
     }
