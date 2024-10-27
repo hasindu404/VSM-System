@@ -192,22 +192,7 @@ export default function CreateAppointment() {
 
     const submit = (e) => {
         e.preventDefault();
-<<<<<<< Updated upstream
 
-        post(route('appointments.store'), {
-          onSuccess: (page) => {
-            if (page.props.flash.success) {
-              toast.success(page.props.flash.success);
-            } else if (page.props.flash.error) {
-              toast.error(page.props.flash.error);
-            }
-          },
-        });
-      };
-
-
-=======
-    
         post(route('appointments'), 
             {
                 appointmentStatus: data.appointmentStatus,
@@ -224,7 +209,7 @@ export default function CreateAppointment() {
             }
         );
     };
->>>>>>> Stashed changes
+
 
     return (
         <GuestLayout>
