@@ -23,7 +23,7 @@ public function store(Request $request){
     ]);
     $newCustomer = Customer::create($data);
 
-    return redirect() -> route('customer.index');
+    return redirect() -> route('profile');
 }
 
 public function edit(Customer $customer){
@@ -40,7 +40,7 @@ public function update(Customer $customer,Request $request){
         'vehicleid'=>'required',
     ]);
     $customer->update($data);
-    return redirect(route('customer.custmang'));
+    return redirect(route('profile'));
 }
 
 public function delete(Customer $customer){

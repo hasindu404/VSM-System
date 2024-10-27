@@ -21,7 +21,7 @@ export default function Personalinfo(){
     });
     const submit = (e) =>{
         e.preventDefault();
-            post(route('/profile'),{
+            post(route('customer.store'),{
                 onSuccess:() => {
                     onSuccess();
                     setData({fname:'',lname:'',address:'',contact:'',email:'',vehicleid:''})
@@ -34,6 +34,7 @@ export default function Personalinfo(){
                 <Sidebar/>
                     <Head title="Personal information"/>
                     <ToastContainer position="top-right" autoClose={5000}/>
+                    <h4>Personal Information</h4>
                     <form onSubmit={submit} className="max-2-md mx-auto mt-8">
                         <div>
                             <InputLabel htmlFor="fname" value="First Name"/>
@@ -41,7 +42,7 @@ export default function Personalinfo(){
                                 id="fname"
                                 name="fname"
                                 value={data.fname}
-                                className="mt-1 block w full"
+                                className="mt-1 block w-full"
                                 autoComplete="fname"
                                 onChange={(e)=> setData('fname',e.target.value)}
                                 required/>
@@ -53,7 +54,7 @@ export default function Personalinfo(){
                                 id="lname"
                                 name="lname"
                                 value={data.lname}
-                                className="mt-1 block w full"
+                                className="mt-1 block w-full"
                                 autoComplete="lname"
                                 onChange={(e)=> setData('lname',e.target.value)}
                                 required/>
@@ -65,7 +66,7 @@ export default function Personalinfo(){
                                 id="address"
                                 name="address"
                                 value={data.address}
-                                className="mt-1 block w full"
+                                className="mt-1 block w-full"
                                 autoComplete="address"
                                 onChange={(e)=> setData('address',e.target.value)}
                                 required/>
@@ -76,7 +77,7 @@ export default function Personalinfo(){
                                 id="contact"
                                 name="contact"
                                 value={data.contact}
-                                className="mt-1 block w full"
+                                className="mt-1 block w-full"
                                 autoComplete="contact"
                                 onChange={(e)=> setData('contact',e.target.value)}
                                 required/>
@@ -87,7 +88,7 @@ export default function Personalinfo(){
                                 id="email"
                                 name="email"
                                 value={data.email}
-                                className="mt-1 block w full"
+                                className="mt-1 block w-full"
                                 autoComplete="email"
                                 onChange={(e)=> setData('email',e.target.value)}
                                 required/>
@@ -98,7 +99,7 @@ export default function Personalinfo(){
                                 id="vehicleid"
                                 name="vehicleid"
                                 value={data.vehicleid}
-                                className="mt-1 block w full"
+                                className="mt-1 block w-full"
                                 autoComplete="vehicleid"
                                 onChange={(e)=> setData('vehicleid',e.target.value)}
                                 required/>

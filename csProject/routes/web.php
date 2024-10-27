@@ -9,6 +9,7 @@ use App\Models\Vehical;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -23,17 +24,17 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/custmang',[CustomerController::class,'index'])->name('customer.index');
-Route::post('/custmang',[CustomerController::class, 'store'])->name('customer.store');
-Route::get('/custmang/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
-Route::put('/custmang/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
-Route::delete('/custmang/{customer}/delete',[CustomerController::class, 'delete'])->name('customer.delete');
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
+Route::post('/customer',[CustomerController::class, 'store'])->name('customer.store');
+Route::get('/customer/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('/customer/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
+Route::delete('/customer/{customer}/delete',[CustomerController::class, 'delete'])->name('customer.delete');
 
-Route::get('/vehimang',[VehicalController::class,'index'])->name('vehical.vehimang');
-Route::post('/vehimang',[VehicalController::class, 'store'])->name('vehical.store');
-Route::get('/vehimang/{vehical}/edit',[VehicalController::class, 'edit'])->name('vehical.edit');
-Route::put('/vehimang/{vehical}/update',[VehicalController::class, 'update'])->name('vehical.update');
-Route::delete('/vehimang/{vehical}/delete',[VehicalController::class, 'delete'])->name('vehical.delete');
+Route::get('/vehical',[VehicalController::class,'index'])->name('vehical.index');
+Route::post('/vehical',[VehicalController::class, 'store'])->name('vehical.store');
+Route::get('/vehicle/{vehical}/edit',[VehicalController::class, 'edit'])->name('vehicle.edit');
+Route::put('/vehicle/{vehical}/update',[VehicalController::class, 'update'])->name('vehicle.update');
+Route::delete('/vehicle/{vehical}/delete',[VehicalController::class, 'delete'])->name('vehicle.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +47,7 @@ Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
 })->name('CustomerDashboard');
 
+//Web
 Route::get('/Services', function () {
     return Inertia::render('Service'); // Ensure the casing matches
 })->name('Services');
@@ -96,7 +98,9 @@ Route::get('/personal', function () {
     return Inertia::render('Customer/Personalinfo'); // Ensure the casing matches
 })->name('profile');
 
-Route::post('/profile', [CustomerController::class, 'store'])->name('personalinfo');
+Route::get('/vehiclereg', function () {
+    return Inertia::render('Vehicle/VehicleRegistration'); // Ensure the casing matches
+})->name('vehiclereg');
 
 Route::get('/service',function(){
     return Inertia::render('Customer/ServiceHistory');
@@ -106,3 +110,5 @@ require __DIR__.'/auth.php';
 
 //Appointments
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
+
+//image Upolad

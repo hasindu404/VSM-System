@@ -7,7 +7,7 @@ import MediaContent from "@/Components/MediaContent"
 const Media = () => {
   return (
     <div>
-        <Head/>
+        <Head title="Media"/>
         <Header/>
         <MediaContent/>
         <Footer/>

@@ -3,10 +3,10 @@ import Normalservice from "@/Components/Normalservice"
 import Footer from "@/Components/Footer"
 import { Head } from "@inertiajs/react"
 
-const Normalservice = () => {
+const Normalservices = () => {
   return (
     <div>
-        <Head/>
+        <Head title="Normal Services"/>
         <Header/>
         <Normalservice/>
         <Footer/>
@@ -14,5 +14,4 @@ const Normalservice = () => {
     </div>
   )
 }
-
-export default Normalservice
+export default Normalservices

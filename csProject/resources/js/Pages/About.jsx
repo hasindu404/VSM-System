@@ -5,7 +5,7 @@ import AboutUs from "@/Components/AboutUs"
 const About = () => {
   return (
     <div>
-        <Head/>
+        <Head title="About Us"/>
         <Header/>
         <AboutUs/>
         <Footer/>
