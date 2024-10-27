@@ -30,12 +30,12 @@ public function store(Request $request){
     }
 
     $newVehical = Vehical::create($data);
-
+  
     return redirect(route('vehiclereg'));
 }
 
 public function edit(Vehical $vehical){
-        return view('vehical.edit',['customer'=> $vehical]);
+        return view('vehical.edit',['vehical'=> $vehical]);
 }
 
 public function update(Vehical $vehical,Request $request){

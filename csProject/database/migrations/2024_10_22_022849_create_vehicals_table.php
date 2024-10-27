@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('vehicalid');
             $table->string('brand');
             $table->integer('year');
-            $table->String('Catagory');
+            $table->String('catagory');
             $table->date('last_service_date');
             $table->string('colour');
             $table->string('images')->nullable();

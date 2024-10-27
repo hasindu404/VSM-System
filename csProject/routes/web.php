@@ -5,6 +5,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\VehicalController;
 use App\Http\Controllers\BusinessHourController;
+use App\Http\Controllers\HomeController;
 use App\Models\Vehical;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -111,4 +112,6 @@ require __DIR__.'/auth.php';
 //Appointments
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
 
-//image Upolad
+//admin auth
+Route::get('Admin/Dashboard',[HomeController::class, 'index'] );
+
