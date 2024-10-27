@@ -109,18 +109,12 @@ Route::get('/service',function(){
 
 require __DIR__.'/auth.php';
 
-<<<<<<< Updated upstream
-//Appointments
-Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
+// Admin auth
+Route::get('Admin/Dashboard', [HomeController::class, 'index']);
 
-//admin auth
-Route::get('Admin/Dashboard',[HomeController::class, 'index'] );
-=======
-//Appointments 
+// Appointments 
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
-
 Route::put('/business-hours/update/{dayOfWeek}', [BusinessHoursController::class, 'update'])->name('business.hours.update');
-
 Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
->>>>>>> Stashed changes
+
 
