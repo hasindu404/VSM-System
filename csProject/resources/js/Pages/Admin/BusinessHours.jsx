@@ -1,18 +1,16 @@
 import React from 'react';
 import Asidebar from './Asidebar';
-import '@/Pages/Customer/CustomerDashboard.css'; // Import Dashboard-specific CSS
-import Aheader from './Aheader'; 
+import Aheader from './Aheader';
+import BusinessHoursForm from '@/Components/BusinessHoursForm';
+import '@/Pages/Customer/CustomerDashboard.css';
 
 export default function Dashboard() {
     return (
         <div className="dashboard-container">
-             
             <Aheader />
-            <Asidebar /> 
+            <Asidebar />
             <div className="content-area">
-                <h1>Dashboard</h1>
-                <p>Welcome to BusinessHours</p>
-                {/* Add other dashboard-specific content here */}
+                <BusinessHoursForm /> {/* Include the BusinessHoursForm component here */}
             </div>
         </div>
     );
