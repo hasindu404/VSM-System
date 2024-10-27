@@ -19,12 +19,13 @@ class BusinessHourController extends Controller
        // Fetch business hours for a specific day of the week
        public function show($dayOfWeek)
        {
-            Log::info('This is an info logggg message.');
+        Log::info('Business hours controller accessed.');
            // Fetch the business hour record based on dayOfWeek
            $businessHour = BusinessHour::where('dayOfWeek', $dayOfWeek)->first();
    
            // Check if business hours exist for that day
            if (!$businessHour) {
+                Log::warning('Business hours not found for day: ' . $dayOfWeek);
                return response()->json(['error' => 'Business hours not found'], 404);
            }
    

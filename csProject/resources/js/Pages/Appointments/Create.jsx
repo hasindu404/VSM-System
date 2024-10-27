@@ -25,7 +25,7 @@ export default function CreateAppointment() {
 
     const [minDate, setMinDate] = useState('');
     const [maxDate, setMaxDate] = useState('');
-    const [minTime, setMinTime] = useState('');
+    // const [minTime, setMinTime] = useState('');
     const [availableTimes, setAvailableTimes] = useState([]); // **New state for available time slots**
     const [bookedTimes, setBookedTimes] = useState([]); // **New state for booked times**
 
@@ -58,7 +58,8 @@ export default function CreateAppointment() {
     const fetchBusinessHours = async (dayOfWeek) => {
         try {
             const response = await axios.get(`/business-hours/${dayOfWeek}`);
-            return response.data;
+            return response.data; // Log the entire response to check its structure
+            // return console.log(response.data.businessHours); // Check if this exists
             
             // Assuming the response includes business hours in the data
             
@@ -152,11 +153,11 @@ export default function CreateAppointment() {
 
     const handleDateChange = async (e) => {
         const newDate = e.target.value;
+        console.log(newDate);
         setData('appointmentDate', newDate);
 
 
         const dayOfWeek = new Date(newDate).toLocaleDateString('en-US', { weekday: 'long' });
-        console.log("140");
         
 
         // **Fetch business hours and booked times for the selected date**
