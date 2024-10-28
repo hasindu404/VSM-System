@@ -15,6 +15,7 @@ class BusinessHour extends Model
         'openingTime',
         'closingTime',
         'isOpen',
+        'step',
 
     ];
 
