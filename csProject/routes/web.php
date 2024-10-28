@@ -5,6 +5,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\VehicalController;
 use App\Http\Controllers\BusinessHourController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Models\Vehical;
 use Illuminate\Foundation\Application;
@@ -21,9 +22,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
 Route::post('/customer',[CustomerController::class, 'store'])->name('customer.store');
@@ -42,11 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-Route::get('/CustomerDashboard', function () {
-    return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
-})->name('CustomerDashboard');
 
 //Web
 Route::get('/Services', function () {
@@ -89,7 +82,7 @@ Route::get('/BusinessHours', function () {
 //Customer
 Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
-})->name('CustomerDashboard');
+})->middleware(['auth', 'verified'])->name('CustomerDashboard');
 
 Route::get('/create', function () {
     return Inertia::render('Appointments/Create'); // Ensure the casing matches
@@ -114,4 +107,11 @@ Route::post('/appointments', [AppointmentController::class, 'store'])->name('app
 
 //admin auth
 Route::get('Admin/Dashboard',[HomeController::class, 'index'] );
+
+//feedback
+Route::get('/feedback',function(){
+    return Inertia::render('Customer/Feedback');
+})->name('feedback');
+Route::post('/feedbackstore', [FeedbackController::class,'store'])->name('feedback.store');
+
 

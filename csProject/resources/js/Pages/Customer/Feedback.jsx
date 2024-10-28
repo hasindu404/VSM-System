@@ -1,0 +1,95 @@
+import GuestLayout from "@/Layouts/GuestLayout";
+import { Head, Link, useForm } from "@inertiajs/react";
+import React from "react";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import { ToastContainer } from "react-toastify";
+import InputLabel from "@/Components/InputLabel";
+import TextInput from "@/Components/TextInput";
+import PrimaryButton from "@/Components/PrimaryButton";
+
+
+export default function Feedback(){
+
+    const{data,setData,post,processing}=useForm({
+        servicetype:'',
+        servicedate:'',
+        description:''
+    });
+
+    const submit = (e) =>{
+        e.preventDefault();
+            post(route('feedback.store'),{
+                onSuccess:()=>{
+                    onSuccess();
+                    setData({servicetype:'',servicedate:'',description:''})
+                }
+            })
+    }
+    return(
+        <GuestLayout>
+            <Header/>
+            <Sidebar/>
+                <Head title="Feedback"/>
+                <ToastContainer position="top-right" autoClose={5000}/>
+                <h3>Feedback</h3>
+                <form onSubmit={submit} className="max-2-md mx-auto mt-8">
+                <div className="mt-4">
+                    <InputLabel htmlFor="servicedate" value="Service Date"/>
+                    <TextInput
+                        id="servicedate"
+                        type="date"
+                        name="servicedate"
+                        value={data.servicedate}
+                        className="mt-1 block w-full"
+                        autoComplete="servicedate"
+                        onChange={(e)=>setData('servicedate',e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="mt-4">
+                    <InputLabel htmlFor="servicetype" value="Service Type"/>
+                    <select
+                        id="servicetype"
+                        name="servicetype"
+                        value={data.servicetype}
+                        className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                        onChange={(e) => setData('servicetype',e.target.value)}
+                        required
+                    >
+                        <option value="">Select a service type</option>
+                        <option value="Full Service">Full Service</option>
+                        <option value="Normal Service">Normal Service</option>
+                    </select>
+                </div>
+                <div className="mt-4">
+                    <InputLabel htmlFor="description" value="Description"/>
+                    <textarea
+                        rows={4}
+                        cols={40}
+                        id="description"
+                        type="text"
+                        name="description"
+                        value={data.description}
+                        className="mt-1 block w-full"
+                        autoComplete="description"
+                        onChange={(e)=>setData('description',e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="mt-4 flex items-center justify-end">
+                    <Link
+                        href={route('CustomerDashboard')}
+                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                        Go to Dashboard
+                    </Link>
+                    <PrimaryButton className="ms-4" disabled={processing}>
+                        Submit Feedback
+                    </PrimaryButton>
+                </div>
+                </form>
+        </GuestLayout>
+    );
+
+}
