@@ -1,65 +1,96 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth; 
 use App\Models\Appointment;
 use App\Models\BusinessHour;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
-    // Method to handle the creation of an appointment
+   
     public function store(Request $request)
     {
-        // Validate the request data
+        Log::info('This is an info log message.');
+        // Validate the request data first
         $validatedData = $request->validate([
-            'customerID' => 'required|integer',
             'appointmentStatus' => 'required|string',
             'serviceType' => 'required|string',
             'appointmentDate' => 'required|date',
             'employerType' => 'required|string',
-            'timeSlot' => 'required|date_format:H:i',
+            'appointmentTime' => 'required|string', // Initial validation
         ]);
-
-        // Parse the appointment date and time
-        $appointmentDate = Carbon::parse($validatedData['appointmentDate']); // Parsing appointment date
-        $appointmentTime = Carbon::parse($validatedData['timeSlot']); // Parsing appointment time
-        $dayOfWeek = $appointmentDate->format('l');  // Getting the day of the week (e.g., 'Monday')
-
-        // Fetch the business hours for the selected day
-        $businessHour = BusinessHour::where('dayOfWeek', $dayOfWeek)->first(); // Fetching business hours
-
-        // Check if the business is open on that day
-       // If business is closed on the selected day
-if (!$businessHour || !$businessHour->isOpen) {
-    return response()->json([
-        'errorType' => 'business_day',
-        'message' => 'Business is closed on this day.'
-    ], 400); // 400 Bad Request
-}
-
-// If appointment time is outside business hours
-if ($appointmentTime->lt(Carbon::parse($businessHour->openingTime)) || 
-    $appointmentTime->gt(Carbon::parse($businessHour->closingTime))) {
-    return response()->json([
-        'errorType' => 'business_hours',
-        'message' => 'Appointment time is outside of business hours.'
-    ], 422); // 422 Unprocessable Entity
-}
-
-        // Create a new appointment
-        $appointment = Appointment::create($validatedData);
-
-         // Optionally, return a response or redirect
-        //  return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
-
-        if ($appointmentTime->gte(Carbon::parse($businessHour->openingTime)) && $appointmentTime->lte(Carbon::parse($businessHour->closingTime))) {
-            return back()->with('success', 'Appointment time is within business hours.');
+    
+        // Proceed to create the appointment if valid
+        $appointment = Appointment::create(array_merge($validatedData, [
+            'customerId' => Auth::id(), // Automatically use the authenticated user's ID
+            'isFinished' => 'notFinished',
+        ]));
+    
+        return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
+    }
+    
+    private function generateAvailableTimes($openingTime, $closingTime, $step)
+    {
+        $times = [];
+        $start = Carbon::createFromTimeString($openingTime);
+        $end = Carbon::createFromTimeString($closingTime);
+    
+        while ($start->lt($end)) {
+            $times[] = $start->format('H:i');
+            $start->addMinutes($step);
         }
-        // return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.']);
+    
+        return $times;
+    }
+    
+    public function getAvailableTimes(Request $request)
+    {
+        $appointmentDate = $request->input('appointmentDate');
+        $dayOfWeek = Carbon::parse($appointmentDate)->dayOfWeek;
+
+        // Fetch business hours for the day
+        $businessHours = BusinessHour::where('day_of_week', $dayOfWeek)->first();
         
+        if ($businessHours) {
+            // Generate available times
+            $availableTimes = $this->generateAvailableTimes($businessHours->opening_time, $businessHours->closing_time, $businessHours->step);
+            
+            // Fetch booked times for the selected date
+            $bookedTimes = Appointment::where('appointment_date', $appointmentDate)
+                                       ->pluck('appointment_time')
+                                       ->map(function($time) {
+                                           return Carbon::parse($time)->format('H:i');
+                                       })
+                                       ->toArray();
+            
+            // Filter out booked times from available times
+            $availableTimes = array_diff($availableTimes, $bookedTimes);
+            
+            return response()->json($availableTimes);
+        }
 
-}
+        return response()->json([]);
+    }
 
-}
+    public function getBookedTimes($selectedDate) {
+        // Check if there are any appointments
+        $appointments = Appointment::where('appointmentDate', $selectedDate)->get();
+    
+        if ($appointments->isEmpty()) {
+            // Handle the case where no appointments exist
+            return response()->json(['message' => 'No appointments found for this date.'], 404);
+        }
+    
+        // Proceed to get appointment times if appointments exist
+        $appointmentTimes = $appointments->pluck('appointmentTime');
+
+        // Return the appointment times to the front end
+        return response()->json([
+            'appointmentTimes' => $appointmentTimes,
+        ]);
+    }
+}    

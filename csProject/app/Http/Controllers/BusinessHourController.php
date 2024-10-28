@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\BusinessHour;
 use Illuminate\Http\Request;
 
@@ -15,29 +15,59 @@ class BusinessHourController extends Controller
     // }
 
     // Update business hours
+
+       // Fetch business hours for a specific day of the week
+       public function show($dayOfWeek)
+       {
+        Log::info('Business hours controller accessed.');
+           // Fetch the business hour record based on dayOfWeek
+           $businessHour = BusinessHour::where('dayOfWeek', $dayOfWeek)->first();
    
-    public function update(Request $request)
-{
-    // Retrieve the dayOfWeek from the request
-    $dayOfWeek = $request->input('dayOfWeek');
+           // Check if business hours exist for that day
+           if (!$businessHour) {
+                Log::warning('Business hours not found for day: ' . $dayOfWeek);
+               return response()->json(['error' => 'Business hours not found'], 404);
+           }
+   
+           Log::info('This is an info log message.');
+           // Return the business hours as JSON
+           return response()->json($businessHour);
+       }
+   
+       
+       public function update(Request $request,$dayOfWeek)
+       {
+           $request->validate([
+               'openingTime' => 'nullable|date_format:H:i',
+               'closingTime' => 'nullable|date_format:H:i',
+               'isOpen' => 'required|boolean',
+               'step' => 'nullable|integer|min:1',
+           ]);
+       
+           $businessHour = BusinessHour::where('dayOfWeek', $request->dayOfWeek)->first();
+       
+           // If the entry doesn't exist, handle the error
+        if (!$businessHour) {
+            return redirect()->back()->with('success', 'Business hour entry not found.');
+        }
+        
+        // Update the business hour entry
+            $businessHour->is_open = $request->is_open;
+            $businessHour->opening_time = $request->opening_time;
+            $businessHour->closing_time = $request->closing_time;
+            $businessHour->step = $request->step;
+            
+        // Save the changes
+            $businessHour->save();
+              
+            return redirect()->back()->with('success', 'Business hours updated successfully.');
+         }
+       
+           
+         
     
-    // Validate the incoming request data
-    $validatedData = $request->validate([
-        'dayOfWeek' => 'required|string',
-        'openingTime' => 'nullable|date_format:H:i',
-        'closingTime' => 'nullable|date_format:H:i',
-        'isOpen' => 'required|boolean',
-    ]);
-
-    // Find the business hour record using the dayOfWeek
-    $businessHour = BusinessHour::where('dayOfWeek', $dayOfWeek)->firstOrFail();
-
-    // Update the business hour record with validated data
-    $businessHour->update($validatedData);
-
-    // Return a success response after updating the record
-    return response()->json(['success' => true, 'message' => 'Business hours updated successfully!']);
-}
+ }
+    
 
 
 
@@ -57,4 +87,4 @@ class BusinessHourController extends Controller
 
     //     return response()->json(['success' => true, 'message' => 'Business hours created successfully!']);
     // }
-}
+

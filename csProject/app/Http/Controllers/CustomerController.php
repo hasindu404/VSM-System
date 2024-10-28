@@ -8,12 +8,15 @@ use Inertia\Inertia;
 
 class CustomerController extends Controller
 {
+ 
     public function index(){
         $customers = Customer::all();
         return Inertia::render('Customers/Personalinfo', ['customer' => $customers]);
 }
 public function store(Request $request){
+   
     $data = ($request) ->validate([
+
         'fname'=> 'required',
         'lname'=> 'required',
         'address'=> 'required',
