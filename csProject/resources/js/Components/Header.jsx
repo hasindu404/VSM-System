@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import { Link, } from '@inertiajs/inertia-react';
 
-const Header = () => {
+export default function Header({auth}){
+
     return (
         <div>
             <nav className="bg-gray-800 p-4">
@@ -36,19 +37,18 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className="flex space-x-2">
-
                             <>
                             <Link
                             href={route('register')}
                             type="button"
                             className="border border-gray-400 text-gray-400 py-2 px-4 rounded hover:bg-gray-700 hover:text-white">Register</Link>
-                            </>
-                            <>
                             <Link
+                            active={route().current('CustomerDashboard')}
                             href={route('login')}
                             type="button"
                             className="border border-yellow-400 text-yellow-400 py-2 px-4 rounded hover:bg-yellow-400 hover:text-gray-800">Login</Link>
                             </>
+
                     </div>
                 </div>
             </nav>
@@ -56,4 +56,3 @@ const Header = () => {
     );
 }
 
-export default Header;

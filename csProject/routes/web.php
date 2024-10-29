@@ -5,6 +5,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\VehicalController;
 use App\Http\Controllers\BusinessHourController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Models\Vehical;
 use Illuminate\Foundation\Application;
@@ -25,6 +26,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Admin/AdminDashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
 Route::post('/customer',[CustomerController::class, 'store'])->name('customer.store');
 Route::get('/customer/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
@@ -42,11 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-Route::get('/CustomerDashboard', function () {
-    return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
-})->name('CustomerDashboard');
 
 //Web
 Route::get('/Services', function () {
@@ -89,7 +86,7 @@ Route::get('/BusinessHours', function () {
 //Customer
 Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
-})->name('CustomerDashboard');
+})->middleware(['auth', 'verified'])->name('CustomerDashboard');
 
 Route::get('/create', function () {
     return Inertia::render('Appointments/Create'); // Ensure the casing matches
@@ -117,4 +114,11 @@ Route::post('/appointments', [AppointmentController::class, 'store'])->name('app
 Route::put('/business-hours/update/{dayOfWeek}', [BusinessHoursController::class, 'update'])->name('business.hours.update');
 Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
 Route::get('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'show']);
+
+//feedback
+Route::get('/feedback',function(){
+    return Inertia::render('Customer/Feedback');
+})->name('feedback');
+Route::post('/feedbackstore', [FeedbackController::class,'store'])->name('feedback.store');
+
 
