@@ -153,7 +153,6 @@ export default function CreateAppointment() {
 
     const handleDateChange = async (e) => {
         const newDate = e.target.value;
-        console.log(newDate);
         setData('appointmentDate', newDate);
 
 
