@@ -107,7 +107,7 @@ Route::get('/service',function(){
 require __DIR__.'/auth.php';
 
 // Admin auth
-Route::get('Admin/Dashboard', [HomeController::class, 'index']);
+Route::get('Admin/Dashboard', [HomeController::class, 'index1'])->name('Admin.AdminDashboard');
 
 // Appointments 
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
