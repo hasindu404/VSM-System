@@ -44,7 +44,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href={route('logout')} method="post"  className="nav-link">
+                    <Link href={route('logout')} method="post" as="button" className="nav-link">
                         <FaSignOutAlt style={{ color: 'red', fontSize: '20px', marginRight: '8px' }} />
                         Logout
                     </Link>

@@ -38,6 +38,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         return redirect()->intended(route('CustomerDashboard'));
+
     }
 
     /**
@@ -53,4 +54,6 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    
 }

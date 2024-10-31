@@ -23,10 +23,15 @@ class AppointmentController extends Controller
             'employerType' => 'required|string',
             'appointmentTime' => 'required|string', // Initial validation
         ]);
+
+         // Retrieve the customerId from the session
+        $customerID = session('customerID'); // Assuming you stored it as 'customerID'
+
+        Log::info('Customer ID from session: ' . $customerID);
     
         // Proceed to create the appointment if valid
         $appointment = Appointment::create(array_merge($validatedData, [
-            'customerId' => Auth::id(), // Automatically use the authenticated user's ID
+            'customerID' => $customerID, // Use the customerId from the session
             'isFinished' => 'notFinished',
         ]));
     
@@ -82,7 +87,9 @@ class AppointmentController extends Controller
     
         if ($appointments->isEmpty()) {
             // Handle the case where no appointments exist
-            return response()->json(['message' => 'No appointments found for this date.'], 404);
+            return response()->json([
+                'appointmentTimes' => [], // Return a specific value indicating no appointments
+            ]);
         }
     
         // Proceed to get appointment times if appointments exist

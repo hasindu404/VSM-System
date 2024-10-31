@@ -104,6 +104,12 @@ Route::get('/service',function(){
     return Inertia::render('Customer/ServiceHistory');
 })->name('service');
 
+//Receptionist
+Route::get('/AppointmentHandle',function(){
+    return Inertia::render('Receptionist/AppointmentHandle');
+})->name('AppointmentHandle');
+
+
 require __DIR__.'/auth.php';
 
 // Admin auth
@@ -111,7 +117,7 @@ Route::get('Admin/Dashboard', [HomeController::class, 'index1'])->name('Admin.Ad
 
 // Appointments 
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
-Route::put('/business-hours/update/{dayOfWeek}', [BusinessHoursController::class, 'update'])->name('business.hours.update');
+Route::put('/business-hours/update/{dayOfWeek}', [BusinessHourController::class, 'update'])->name('business.hours.update');
 Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
 Route::get('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'show']);
 
