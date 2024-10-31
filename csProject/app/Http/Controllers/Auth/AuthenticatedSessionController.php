@@ -33,6 +33,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+    // Retrieve the authenticated user
+    $user = Auth::user(); // Get the currently authenticated user
+
+    // Store customerID in the session
+    session(['customerID' => $user->id]); // Assuming the user model has an 'id' attribute
+
         return redirect()->intended(route('CustomerDashboard', absolute: false));
     }
 
@@ -49,4 +55,6 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    
 }
