@@ -105,6 +105,8 @@ export default function CreateAppointment() {
     //             },
     //         });
             
+
+
     //     } catch (error) {
     //         console.error('Error fetching booked times:', error);
     //         console.log('Error details:', error.response ? error.response.data : 'No response data');
@@ -114,14 +116,17 @@ export default function CreateAppointment() {
     const fetchBookedTimes = async (selectedDate) => {
         try {
             const response = await axios.get(`/booked-times/${selectedDate}`);
-            console.log(response.data.appointmentTimes);
+
             setBookedTimes(response.data.appointmentTimes);
-            
-            console.log(response);
+            console.log(response.data.appointmentTimes);
         } catch (error) {
             console.error('Error fetching booked times:', error);
         }
     };
+
+    useEffect(() => {
+        console.log('Updated bookedTimes:', bookedTimes);
+    }, [bookedTimes]);
 
     
     // **Generate available time slots based on business hours and step**
@@ -139,8 +144,18 @@ export default function CreateAppointment() {
         // Create time slots based on step interval
         while (currentTime < endTime) {
             const timeString = currentTime.toTimeString().slice(0, 5); // Format as HH:mm
-            if (!bookedTimes.includes(timeString)) { // **Exclude booked times**
-                console.log(!bookedTimes);
+
+            // Modify bookedTimes to include only HH:MM
+            const bookedTimesShortened = bookedTimes.map(time => time.slice(0, 5));
+            console.log("line148");
+            console.log(bookedTimesShortened);
+            const isBooked = bookedTimesShortened.includes(timeString); 
+            console.log(isBooked);
+
+
+            
+            if (!isBooked) { // **Exclude booked times**
+                
                 times.push(timeString);
             }
             currentTime.setMinutes(currentTime.getMinutes() + step);
@@ -163,9 +178,9 @@ export default function CreateAppointment() {
         const businessHours = await fetchBusinessHours(dayOfWeek);
         // console.log("145");
         // console.log(businessHours);
-        await fetchBookedTimes(newDate); // **Fetch booked times**
-        console.log(businessHours);
-        console.log(bookedTimes);
+        const aa = await fetchBookedTimes(newDate); // **Fetch booked times**
+        console.log('Fetched booked times:', aa);
+        
         if (businessHours) {
             generateAvailableTimes(businessHours.openingTime, businessHours.closingTime, businessHours.step); // **Generate times based on business hours**
             console.log("line156");
