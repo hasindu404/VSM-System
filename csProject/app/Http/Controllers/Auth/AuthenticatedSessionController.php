@@ -32,14 +32,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        if($request->user()->usertype === 'admin'){
 
-    // Retrieve the authenticated user
-    $user = Auth::user(); // Get the currently authenticated user
+            return redirect()->route('Admin.AdminDashboard');
+        }
 
-    // Store customerID in the session
-    session(['customerID' => $user->id]); // Assuming the user model has an 'id' attribute
+        return redirect()->intended(route('CustomerDashboard'));
 
-        return redirect()->intended(route('CustomerDashboard', absolute: false));
     }
 
     /**
