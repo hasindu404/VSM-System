@@ -67,9 +67,9 @@ class BusinessHourController extends Controller
          public function update(Vehical $vehical,Request $request){
             $data = ($request) ->validate([
                 'openingTime' => 'nullable|date_format:H:i',
-    //            'closingTime' => 'nullable|date_format:H:i',
-    //            'isOpen' => 'required|boolean',
-    //            'step' => 'nullable|integer|min:1',
+                'closingTime' => 'nullable|date_format:H:i',
+                'isOpen' => 'required|boolean',
+                'step' => 'nullable|integer|min:1',
             ]);
             $vehical->update($data);
             return redirect(route('vehical.vehimang'));
