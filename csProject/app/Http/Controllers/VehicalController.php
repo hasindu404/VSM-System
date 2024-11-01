@@ -10,18 +10,18 @@ use Inertia\Inertia;
 class VehicalController extends Controller
 {
     public function index(){
-        $vehical = Vehical::all();
-        return Inertia::render('Vehicle/VehicleRegistration',['vehicals'=> $vehical]);
+        $vehicals = Vehical::all();
+        return Inertia::render('Vehicle/VehicleRegistration',['vehicals'=> $vehicals]);
 }
 public function store(Request $request){
-    $data = $request ->validate([
+    $data = ($request) ->validate([
         'vehicalid'=> 'required',
         'brand'=> 'required',
         'year'=> 'required',
         'Catagory'=>'required',
-        'last_service_date' => 'required|date',
+        'last_service_date' => 'required',
         'colour'=>'required',
-        'images'=>'required|image'
+        'images'=>'required'
     ]);
     //file Haindling
     if($request->hasFile('images')){
@@ -30,7 +30,7 @@ public function store(Request $request){
     }
 
     $newVehical = Vehical::create($data);
-  
+
     return redirect(route('vehiclereg'));
 }
 

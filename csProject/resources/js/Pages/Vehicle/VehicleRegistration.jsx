@@ -118,7 +118,7 @@ export default function VehicleRegistration(){
                             type="file"
                             value={data.images}
                             accept="images/*"
-                            onChange={(e)=>setData('images',e,target.files[0])}
+                            onChange={(e)=>setData('images',e.target.value)}
                         />
                     </div>
                     <div className="mt-4 flex items-center justify-end">
