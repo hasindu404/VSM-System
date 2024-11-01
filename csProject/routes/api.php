@@ -10,4 +10,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
-Route::get('/closed-days', [BusinessHourController::class, 'getClosedDays'])->name('closed-days');
+// Route::get('/closed-days', [BusinessHourController::class, 'getClosedDays'])->name('closed-days');
+Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name('appointmenthandle');
+Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
