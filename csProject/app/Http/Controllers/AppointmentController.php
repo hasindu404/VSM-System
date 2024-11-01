@@ -35,7 +35,14 @@ class AppointmentController extends Controller
             'isFinished' => 'notFinished',
         ]));
     
-        return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
+        return redirect()->route('appointments')->with('success', 'Appointment created successfully!');
+        // return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
+        // 
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Appointment created successfully!'
+        // ]);
+        // return back()->with('success', 'Appointment created successfully!');
     }
     
     private function generateAvailableTimes($openingTime, $closingTime, $step)
@@ -100,4 +107,6 @@ class AppointmentController extends Controller
             'appointmentTimes' => $appointmentTimes,
         ]);
     }
+
+    
 }    
