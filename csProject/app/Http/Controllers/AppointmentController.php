@@ -108,5 +108,32 @@ class AppointmentController extends Controller
         ]);
     }
 
-    
+    public function index(Request $request)
+{
+    Log::info('Request received at appointmenthandle');
+    $date = $request->input('date');
+    $appointments = Appointment::query();
+
+    if ($date === 'today') {
+        $appointments->whereDate('appointmentDate', Carbon::today());
+    } elseif ($date === 'tomorrow') {
+        $appointments->whereDate('appointmentDate', Carbon::tomorrow());
+    } elseif ($date === 'after') {
+        $appointments->where('appointmentDate', '>', Carbon::tomorrow());
+    }
+
+    return response()->json($appointments->get());
+}
+
+// public function finish($id)
+// {
+//     Log::info("Finishing appointment with ID: $id");
+//     $appointment = Appointment::findOrFail($id);
+//     $appointment->isFinished = true; // Assuming this field exists
+//     $appointment->save();
+
+//     return response()->json(['success' => true]);
+// }
+
+
 }    
