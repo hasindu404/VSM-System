@@ -14,7 +14,7 @@ export default function ReceptionistSidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/manage-appointments" className="nav-link">
+                    <Link href="C:\Users\HP\Documents\GitHub\VSM-System\csProject\resources\js\Pages\Receptionist\AppointmentHandle.jsx" className="nav-link">
                         <FaCalendarCheck style={{ color: 'green', fontSize: '20px', marginRight: '8px' }} />
                         Appointment Handling
                     </Link>
