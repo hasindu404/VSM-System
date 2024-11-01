@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\BusinessHour;
 use Illuminate\Http\Request;
@@ -35,35 +36,55 @@ class BusinessHourController extends Controller
        }
    
        
-       public function update(Request $request,$dayOfWeek)
-       {
-           $request->validate([
-               'openingTime' => 'nullable|date_format:H:i',
-               'closingTime' => 'nullable|date_format:H:i',
-               'isOpen' => 'required|boolean',
-               'step' => 'nullable|integer|min:1',
-           ]);
+    //    public function update(Request $request,$dayOfWeek)
+    //    {
+    //        $request->validate([
+    //            'openingTime' => 'nullable|date_format:H:i',
+    //            'closingTime' => 'nullable|date_format:H:i',
+    //            'isOpen' => 'required|boolean',
+    //            'step' => 'nullable|integer|min:1',
+    //        ]);
        
-           $businessHour = BusinessHour::where('dayOfWeek', $request->dayOfWeek)->first();
+    //        $businessHour = BusinessHour::where('dayOfWeek', $request->dayOfWeek)->first();
        
-           // If the entry doesn't exist, handle the error
-        if (!$businessHour) {
-            return redirect()->back()->with('success', 'Business hour entry not found.');
-        }
+    //        // If the entry doesn't exist, handle the error
+    //     if (!$businessHour) {
+    //         return redirect()->back()->with('success', 'Business hour entry not found.');
+    //     }
         
-        // Update the business hour entry
-            $businessHour->is_open = $request->is_open;
-            $businessHour->opening_time = $request->opening_time;
-            $businessHour->closing_time = $request->closing_time;
-            $businessHour->step = $request->step;
+    //     // Update the business hour entry
+    //         $businessHour->is_open = $request->is_open;
+    //         $businessHour->opening_time = $request->opening_time;
+    //         $businessHour->closing_time = $request->closing_time;
+    //         $businessHour->step = $request->step;
             
-        // Save the changes
-            $businessHour->save();
+    //     // Save the changes
+    //         $businessHour->save();
               
-            return redirect()->back()->with('success', 'Business hours updated successfully.');
-         }
+    //         return redirect()->back()->with('success', 'Business hours updated successfully.');
+    //      }
+
+         public function update(Vehical $vehical,Request $request){
+            $data = ($request) ->validate([
+                'openingTime' => 'nullable|date_format:H:i',
+    //            'closingTime' => 'nullable|date_format:H:i',
+    //            'isOpen' => 'required|boolean',
+    //            'step' => 'nullable|integer|min:1',
+            ]);
+            $vehical->update($data);
+            return redirect(route('vehical.vehimang'));
+        }
        
-           
+        // Example controller method in Laravel
+        public function getClosedDays()
+        {
+            $closedDays = DB::table('business_hours')
+                ->where('isOpen', 0)
+                ->pluck('dayOfWeek'); // Assuming 'date' is the column name
+
+            return response()->json($closedDays);
+        }
+   
          
     
  }
