@@ -8,15 +8,14 @@ use Inertia\Inertia;
 
 class CustomerController extends Controller
 {
- 
+
     public function index(){
         $customers = Customer::all();
-        return Inertia::render('Customers/Personalinfo', ['customer' => $customers]);
+        return Inertia::render('Customer/Personalinfo', ['customer' => $customers]);
 }
 public function store(Request $request){
-   
-    $data = ($request) ->validate([
 
+    $data = ($request) ->validate([
         'fname'=> 'required',
         'lname'=> 'required',
         'address'=> 'required',
@@ -26,7 +25,7 @@ public function store(Request $request){
     ]);
     $newCustomer = Customer::create($data);
 
-    return redirect() -> route('profile');
+    return redirect(route('profile'));
 }
 
 public function edit(Customer $customer){

@@ -13,7 +13,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 export default function Personalinfo(){
     const {data, setData, post, processing } = useForm({
             fname: '',
-            lnamee: '',
+            lname: '',
             address: '',
             contact: '',
             email: '',

@@ -29,15 +29,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
 Route::post('/customer',[CustomerController::class, 'store'])->name('customer.store');
-Route::get('/customer/{customer}/edit',[CustomerController::class, 'edit'])->name('customer.edit');
-Route::put('/customer/{customer}/update',[CustomerController::class, 'update'])->name('customer.update');
-Route::delete('/customer/{customer}/delete',[CustomerController::class, 'delete'])->name('customer.delete');
+
 
 Route::get('/vehical',[VehicalController::class,'index'])->name('vehical.index');
 Route::post('/vehical',[VehicalController::class, 'store'])->name('vehical.store');
-Route::get('/vehicle/{vehical}/edit',[VehicalController::class, 'edit'])->name('vehicle.edit');
-Route::put('/vehicle/{vehical}/update',[VehicalController::class, 'update'])->name('vehicle.update');
-Route::delete('/vehicle/{vehical}/delete',[VehicalController::class, 'delete'])->name('vehicle.delete');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -115,16 +111,16 @@ require __DIR__.'/auth.php';
 // Admin auth
 Route::get('Admin/Dashboard', [HomeController::class, 'index1'])->name('Admin.AdminDashboard');
 
-// Appointments 
+// Appointments
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments');
 Route::put('/business-hours/update/{dayOfWeek}', [BusinessHourController::class, 'update'])->name('business.hours.update');
 Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
 Route::get('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'show']);
 
 //feedback
-Route::get('/feedback',function(){
+Route::get('/feedbacksub',function(){
     return Inertia::render('Customer/Feedback');
-})->name('feedback');
-Route::post('/feedbackstore', [FeedbackController::class,'store'])->name('feedback.store');
+})->name('feedbacksub');
+Route::post('/feedback', [FeedbackController::class,'store'])->name('feedback.store');
 
 
