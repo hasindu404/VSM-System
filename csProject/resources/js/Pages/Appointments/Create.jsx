@@ -51,7 +51,7 @@ export default function CreateAppointment() {
         const fetchClosedDays = async () => {
             try {
                 // const response = await axios.get(`/closed-days`);
-                const response = await axios.get(`http://127.0.0.1:8000/api/closed-days`); 
+                const response = await axios.get(`/closed-days`); 
                 console.log('Full response:', response.data); 
                 // setClosedDays(response.data.closed_days);
                 // Check if response data is an array
@@ -84,13 +84,6 @@ export default function CreateAppointment() {
         // return closedDays.includes(dayOfWeek);
     };
 
-    // useEffect(() => {
-    //     // Check for a flash message
-    //     if (flash.success) {
-    //         toast.success(flash.success); // Display the flash success message as a toast
-    //     }
-    // }, [flash]);
-    
 
     const fetchBusinessHours = async (dayOfWeek) => {
         try {
@@ -228,58 +221,21 @@ export default function CreateAppointment() {
     const submit = async (e) => {
         e.preventDefault();
 
-        // post(route('appointments'), 
-        //     {
-        //         appointmentStatus: data.appointmentStatus,
-        //         serviceType: data.serviceType,
-        //         appointmentDate: data.appointmentDate,
-        //         appointmentTime: data.appointmentTime,
-        //     },
-            // {
-            //     onSuccess: () => {
-            //         toast.success('Appointment created successfully!');
-            //         reset('appointmentStatus', 'serviceType', 'appointmentDate', 'appointmentTime');
-            //     },
-                
-            // }
-
-            // {
-            //     onSuccess: () => {
-            //         toast.success('Appointment created successfully!'); // Show success message
-            //         reset('appointmentStatus', 'serviceType', 'appointmentDate', 'appointmentTime');
-            //         setAvailableTimes([]); // Optionally reset available times if needed
-            //     },
-            //     onError: () => {
-            //         toast.error('Failed to create appointment. Please try again.'); // Show error message
-            //     }
-            // }
-
-            // {
-            //     onSuccess: (response) => {
-            //         console.log('Response:', response); 
-            //         if (response.status === 'success') {
-            //             toast.success(response.message); // Display the success message from the backend
-            //             reset('appointmentStatus', 'serviceType', 'appointmentDate', 'appointmentTime');
-            //             setAvailableTimes([]); // Optionally reset available times
-            //         } else {
-            //             toast.error('Failed to create appointment. Please try again.'); // Handle unexpected response
-            //         }
-            //     },
-            //     onError: () => {
-            //         toast.error('Failed to create appointment. Please try again.'); // Show error message
-            //         console.error('Error details:', error);
-            //     }
-            // }
-        // );
-
+       
         try {
-            const response = await axios.post(route(`api/appointments`), {  
+           
+            const requestData = {
                 appointmentStatus: data.appointmentStatus,
                 serviceType: data.serviceType,
                 appointmentDate: data.appointmentDate,
                 appointmentTime: data.appointmentTime,
-            });
-    
+            };
+        
+            console.log('Request data:', requestData); // Log the data being sent
+        
+            const response = await axios.post(`/appointments`, requestData);
+            console.log('Inertia Response:', response);
+
             if (response.data.status === 'success') {
                 toast.success(response.data.message); // Show success toast
                 reset('appointmentStatus', 'serviceType', 'appointmentDate', 'appointmentTime');
