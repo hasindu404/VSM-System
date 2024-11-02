@@ -19,8 +19,8 @@ const Header = () => {
             </a>
            </li>
             <div className="customer-info">
-                <p className="customer-name">Customer name</p>
-                 <p className="customer-role">Customer</p>
+                <p className="customer-name">Receptionist Name</p>
+                 <p className="customer-role">Receptionist</p>
             </div>
           </ul>
         </nav>

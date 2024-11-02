@@ -1,18 +1,13 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import './Sidebar.css';
-import { FaBeer, FaCar, FaCalendarAlt, FaHistory, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import {  FaCar, FaCalendarAlt, FaHistory, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaCommentDots } from 'react-icons/fa';
 
 export default function Sidebar() {
     return (
         <div className="sidebar">
             <ul>
-                <li>
-                    <Link href="CustomerDashboard" className="nav-link">
-                        <FaBeer style={{ color: 'gold', fontSize: '20px', marginRight: '8px' }} />
-                        Dashboard
-                    </Link>
-                </li>
                 <li>
                     <Link href="/vehiclereg" className="nav-link">
                         <FaCar style={{ color: 'blue', fontSize: '20px', marginRight: '8px' }} />
@@ -35,6 +30,12 @@ export default function Sidebar() {
                     <Link href="/reminders" className="nav-link">
                         <FaBell style={{ color: 'orange', fontSize: '20px', marginRight: '8px' }} />
                         Reminders
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/feedback" className="nav-link"> {/* New Feedback link */}
+                        <FaCommentDots style={{ color: 'teal', fontSize: '20px', marginRight: '8px' }} /> {/* Feedback icon */}
+                        Feedback
                     </Link>
                 </li>
                 <li>

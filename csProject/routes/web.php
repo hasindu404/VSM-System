@@ -116,6 +116,14 @@ Route::post('/appointments', [AppointmentController::class, 'store'])->name('app
 Route::put('/business-hours/update/{dayOfWeek}', [BusinessHourController::class, 'update'])->name('business.hours.update');
 Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTimes'])->name('booked-times');
 Route::get('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'show']);
+Route::get('/closed-days', [BusinessHourController::class, 'getClosedDays'])->name('closed-days');
+Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name('appointmenthandle');
+Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
+
+
+
+
+
 
 //feedback
 Route::get('/feedbacksub',function(){

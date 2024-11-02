@@ -14,28 +14,54 @@ class AppointmentController extends Controller
    
     public function store(Request $request)
     {
-        Log::info('This is an info log message.');
+        Log::info('Start of store method');
+
+          // Log session data to check if customerID is present
+        Log::info('Session data: ', session()->all());
+
         // Validate the request data first
         $validatedData = $request->validate([
             'appointmentStatus' => 'required|string',
             'serviceType' => 'required|string',
             'appointmentDate' => 'required|date',
-            'employerType' => 'required|string',
             'appointmentTime' => 'required|string', // Initial validation
         ]);
 
-         // Retrieve the customerId from the session
-        $customerID = session('customerID'); // Assuming you stored it as 'customerID'
+        // Check for authenticated user
+    if (auth()->check()) {
+        $customerID = auth()->id();
+        Log::info('Authenticated user ID: ' . $customerID);
+    } else {
+        Log::warning('No authenticated user found. Appointment cannot be created.');
+        return response()->json(['status' => 'error', 'message' => 'User not authenticated.'], 401);
+    }
 
-        Log::info('Customer ID from session: ' . $customerID);
+
+        // $customerID = session('customerID'); // Assuming you stored it as 'customerID'
+        //  Log::info('Customer ID from session: ' . $customerID);
+
+        $customerID = auth()->id();
+
+    
     
         // Proceed to create the appointment if valid
         $appointment = Appointment::create(array_merge($validatedData, [
             'customerID' => $customerID, // Use the customerId from the session
             'isFinished' => 'notFinished',
+            'employerType' => 'customer', // Automatically set employerType to 'customer'
         ]));
+
+        Log::info(request()->all());
+
     
-        return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
+        // return redirect()->route('appointments')->with('success', 'Appointment created successfully!');
+        // return response()->json(['success' => true, 'message' => 'Appointment created successfully!']);
+        // 
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Appointment created successfully!'
+        ]);
+        // return back()->with('success', 'Appointment created successfully!');
     }
     
     private function generateAvailableTimes($openingTime, $closingTime, $step)
@@ -100,4 +126,52 @@ class AppointmentController extends Controller
             'appointmentTimes' => $appointmentTimes,
         ]);
     }
+
+    public function index(Request $request)
+{
+    Log::info('Request received at appointmenthandle');
+    $date = $request->input('date');
+    $appointments = Appointment::query();
+
+    if ($date === 'today') {
+        $appointments->whereDate('appointmentDate', Carbon::today());
+    } elseif ($date === 'tomorrow') {
+        $appointments->whereDate('appointmentDate', Carbon::tomorrow());
+    } elseif ($date === 'after') {
+        $appointments->where('appointmentDate', '>', Carbon::tomorrow());
+    }
+
+    return response()->json($appointments->get());
+}
+
+public function updateStatus(Request $request, $id)
+{
+    $request->validate([
+        'isFinished' => 'required|string|in:finished,notFinished',
+    ]);
+
+    $appointment = Appointment::find($id);
+    if (!$appointment) {
+        return response()->json(['error' => 'Appointment not found'], 404);
+    }
+
+    $appointment->isFinished = $request->isFinished;
+    $appointment->save();
+
+    // Mail::to($appointment->customer->email)->send(new AppointmentStatusUpdated($appointment));
+    return response()->json(['message' => 'Appointment status updated successfully'], 200);
+}
+
+
+// public function finish($id)
+// {
+//     Log::info("Finishing appointment with ID: $id");
+//     $appointment = Appointment::findOrFail($id);
+//     $appointment->isFinished = true; // Assuming this field exists
+//     $appointment->save();
+
+//     return response()->json(['success' => true]);
+// }
+
+
 }    

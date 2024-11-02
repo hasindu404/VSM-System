@@ -4,23 +4,44 @@ import { useForm } from '@inertiajs/react';
 export default function BusinessHoursForm() {
     const { data, setData, put, processing, errors, reset, recentlySuccessful } = useForm({
         dayOfWeek: '',
-        is_open: '1',
-        opening_time: '',
-        closing_time: '',
-        step: 1,
+        isOpen: '1',
+        openingTime: '',
+        closingTime: '',
+        step: 60,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        put(route('business.hours.update', { dayOfWeek: data.dayOfWeek }), {
-            data: {
-                is_open: data.is_open,
-                opening_time: data.opening_time,
-                closing_time: data.closing_time,
-                step: data.step,
-            },
-            onSuccess: () => reset(),
-        });
+       
+        // Construct the payload
+    const payload = {
+        isOpen: data.isOpen,
+        step: data.step,
+    };
+
+      // Conditionally add times only if isOpen is true
+      if (data.isOpen === '1') {
+        payload.openingTime = data.openingTime;
+        payload.closingTime = data.closingTime;
+    }
+
+    // Log the payload to the console
+    console.log('Submitting data:', payload);
+
+    // Send the PUT request
+    put(route('business.hours.update', { dayOfWeek: data.dayOfWeek }), {
+        data: payload,
+        onSuccess: () => reset(), // Reset form or state on success
+    });
+        // put(route('business.hours.update', { dayOfWeek: data.dayOfWeek }), {
+        //     data: {
+        //         isOpen: data.isOpen,
+        //         openingTime: data.openingTime,
+        //         closingTime: data.closingTime,
+        //         step: data.step,
+        //     },
+        //     onSuccess: () => reset(),
+        // });
     };
 
     return (
@@ -60,49 +81,49 @@ export default function BusinessHoursForm() {
 
                 {/* Is Open Selection */}
                 <div className="mb-4">
-                    <label htmlFor="is_open" className="block text-gray-700">Is Open</label>
+                    <label htmlFor="isOpen" className="block text-gray-700">Is Open</label>
                     <select
-                        id="is_open"
-                        name="is_open"
-                        value={data.is_open}
-                        onChange={(e) => setData('is_open', e.target.value)}
+                        id="isOpen"
+                        name="isOpen"
+                        value={data.isOpen}
+                        onChange={(e) => setData('isOpen', e.target.value)}
                         className="mt-1 block w-full p-2 border-gray-300 rounded-md"
                         required
                     >
                         <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>
-                    {errors.is_open && <div className="text-red-600 mt-2">{errors.is_open}</div>}
+                    {errors.isOpen && <div className="text-red-600 mt-2">{errors.isOpen}</div>}
                 </div>
 
                 {/* Opening Time */}
                 <div className="mb-4">
-                    <label htmlFor="opening_time" className="block text-gray-700">Opening Time</label>
+                    <label htmlFor="openingTime" className="block text-gray-700">Opening Time</label>
                     <input
-                        id="opening_time"
+                        id="openingTime"
                         type="time"
-                        name="opening_time"
-                        value={data.opening_time}
-                        onChange={(e) => setData('opening_time', e.target.value)}
+                        name="openingTime"
+                        value={data.openingTime}
+                        onChange={(e) => setData('openingTime', e.target.value)}
                         className="mt-1 block w-full p-2 border-gray-300 rounded-md"
                         required
                     />
-                    {errors.opening_time && <div className="text-red-600 mt-2">{errors.opening_time}</div>}
+                    {errors.openingTime && <div className="text-red-600 mt-2">{errors.openingTime}</div>}
                 </div>
 
                 {/* Closing Time */}
                 <div className="mb-4">
-                    <label htmlFor="closing_time" className="block text-gray-700">Closing Time</label>
+                    <label htmlFor="closingTime" className="block text-gray-700">Closing Time</label>
                     <input
-                        id="closing_time"
+                        id="closingTime"
                         type="time"
-                        name="closing_time"
-                        value={data.closing_time}
-                        onChange={(e) => setData('closing_time', e.target.value)}
+                        name="closingTime"
+                        value={data.closingTime}
+                        onChange={(e) => setData('closingTime', e.target.value)}
                         className="mt-1 block w-full p-2 border-gray-300 rounded-md"
                         required
                     />
-                    {errors.closing_time && <div className="text-red-600 mt-2">{errors.closing_time}</div>}
+                    {errors.closingTime && <div className="text-red-600 mt-2">{errors.closingTime}</div>}
                 </div>
 
                 {/* Step Interval */}
