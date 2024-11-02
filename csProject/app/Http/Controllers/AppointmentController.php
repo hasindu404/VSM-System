@@ -144,15 +144,34 @@ class AppointmentController extends Controller
     return response()->json($appointments->get());
 }
 
-public function finish($id)
+public function updateStatus(Request $request, $id)
 {
-    Log::info("Finishing appointment with ID: $id");
-    $appointment = Appointment::findOrFail($id);
-    $appointment->isFinished = true; // Assuming this field exists
+    $request->validate([
+        'isFinished' => 'required|string|in:finished,notFinished',
+    ]);
+
+    $appointment = Appointment::find($id);
+    if (!$appointment) {
+        return response()->json(['error' => 'Appointment not found'], 404);
+    }
+
+    $appointment->isFinished = $request->isFinished;
     $appointment->save();
 
-    return response()->json(['success' => true]);
+    // Mail::to($appointment->customer->email)->send(new AppointmentStatusUpdated($appointment));
+    return response()->json(['message' => 'Appointment status updated successfully'], 200);
 }
+
+
+// public function finish($id)
+// {
+//     Log::info("Finishing appointment with ID: $id");
+//     $appointment = Appointment::findOrFail($id);
+//     $appointment->isFinished = true; // Assuming this field exists
+//     $appointment->save();
+
+//     return response()->json(['success' => true]);
+// }
 
 
 }    
