@@ -85,7 +85,33 @@ export default function Dashboard() {
           console.error('Failed to fetch appointments:', error);
       }
   };
-  
+
+  const handleUpdateStatus = async (id, status) => {
+    try {
+        const response = await fetch(`/api/appointments/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ isFinished: status }), // Updated status
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update status');
+        }
+
+        // Update the filteredAppointments state to reflect the change
+        setFilteredAppointments((prevAppointments) => 
+            prevAppointments.map((appointment) => 
+                appointment.id === id ? { ...appointment, isFinished: status } : appointment
+            )
+        );
+
+        console.log('Status updated successfully');
+    } catch (error) {
+        console.error('Error updating status:', error);
+    }
+};
 
     return (
         <div className="dashboard-container flex justify-center"> 
@@ -153,23 +179,26 @@ export default function Dashboard() {
                                   <TableCell>{appointment.appointmentTime}</TableCell>
                                   <TableCell>
                                      <select
-                                        value={appointment.isFinished}
-                                        onChange={async (e) => {
-                                            const newStatus = e.target.value;
-                                            await handleUpdateStatus(appointment.id, newStatus);
-                                        }}
-                                        className="p-2 border rounded-md w-36"
-                                    >
-                                        <option value="notFinished">Not Finished</option>
-                                        <option value="finished">Finished</option>
+                                       value={appointment.isFinished} // Bind to current status
+                                       onChange={async (e) => {
+                                           const newStatus = e.target.value;
+                                           await handleUpdateStatus(appointment.id, newStatus); // Call update function
+                                       }}
+                                       className="p-2 border rounded-md w-36"
+                                   >
+                                       <option value="notFinished">Not Finished</option>
+                                       <option value="finished">Finished</option>
                                     </select>
                                 </TableCell>
                                 </TableRow>
                               ))}
                             </TableBody>
                           </Table>
+
+                          
                         </div>
                     </div>
+                 
                 </main>
             </div>
         </div>
