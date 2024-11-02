@@ -31,6 +31,21 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // // Regenerate the session to prevent session fixation attacks
+        // $request->session()->regenerate();
+
+        //  // Log authenticated user information
+        // Log::info('Authenticated user: ', $request->user()->toArray());
+
+        //  // Set customerID in the session
+        // $customerID = $request->user()->id; 
+        // session(['customerID' => $request->user()->id]); 
+        // Log::info('Customer ID set in session: ' . session('customerID'));
+
+
+        //     // Log the customer ID for debugging
+        // Log::info('Customer ID set in session after login: ' . $request->user()->id);
+
         $request->session()->regenerate();
         if($request->user()->usertype === 'admin'){
 
