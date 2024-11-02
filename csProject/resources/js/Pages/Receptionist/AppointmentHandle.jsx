@@ -129,7 +129,7 @@ export default function Dashboard() {
                       
                    }}>
                     <div className="container mx-auto px-6 py-8">
-                        <h1 className="text-2xl font-semibold text-gray-900 mb-6">Receptionist Dashboard</h1>
+                        <h1 className="text-2xl font-semibold text-gray-900 mb-6">Appointment Handling</h1>
 
                         {/* Date selection buttons */}
                         <div className="flex space-x-4 mb-6">
