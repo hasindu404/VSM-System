@@ -14,3 +14,4 @@ Route::get('/user', function (Request $request) {
 Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name('appointmenthandle');
 Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
 Route::put('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'update'])->name('business.hours.update');
+Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
