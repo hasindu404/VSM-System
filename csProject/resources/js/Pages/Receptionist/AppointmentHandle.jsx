@@ -88,7 +88,7 @@ export default function Dashboard() {
   
 
     return (
-        <div className="dashboard-container flex">
+        <div className="dashboard-container flex justify-center"> 
             {/* Sidebar Component */}
             <Rsidebar />
             
@@ -152,13 +152,17 @@ export default function Dashboard() {
                                   <TableCell>{appointment.appointmentDate}</TableCell>
                                   <TableCell>{appointment.appointmentTime}</TableCell>
                                   <TableCell>
-                                    {appointment.isFinished === 'finished' ? (
-                                        'Finished'
-                                    ) : (
-                                        <Button onClick={() => handleFinish(appointment.id)} variant="outline" size="sm">
-                                            Not Finished
-                                        </Button>
-                                    )}
+                                     <select
+                                        value={appointment.isFinished}
+                                        onChange={async (e) => {
+                                            const newStatus = e.target.value;
+                                            await handleUpdateStatus(appointment.id, newStatus);
+                                        }}
+                                        className="p-2 border rounded-md w-36"
+                                    >
+                                        <option value="notFinished">Not Finished</option>
+                                        <option value="finished">Finished</option>
+                                    </select>
                                 </TableCell>
                                 </TableRow>
                               ))}
