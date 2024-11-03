@@ -9,7 +9,7 @@ export default function ReceptionistSidebar() {
         <div className="sidebar">
             <ul>
                 <li>
-                    <Link href="ReceptionistDashboard" className="nav-link">
+                    <Link href="/ReceptionDashboard" className="nav-link">
                         <FaTachometerAlt style={{ color: 'gold', fontSize: '20px', marginRight: '8px' }} />
                         Dashboard
                     </Link>
