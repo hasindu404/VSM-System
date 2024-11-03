@@ -19,7 +19,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateAppointment() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        appointmentStatus: '',
+        vehicalid: '',
+        description: '',
         serviceType: '',
         appointmentDate: '',
         employerType: 'Customer',
@@ -225,7 +226,8 @@ export default function CreateAppointment() {
         try {
            
             const requestData = {
-                appointmentStatus: data.appointmentStatus,
+                vehicalid: data.vehicalid,
+                description: data.description,
                 serviceType: data.serviceType,
                 appointmentDate: data.appointmentDate,
                 appointmentTime: data.appointmentTime,
@@ -238,7 +240,7 @@ export default function CreateAppointment() {
 
             if (response.data.status === 'success') {
                 toast.success(response.data.message); // Show success toast
-                reset('appointmentStatus', 'serviceType', 'appointmentDate', 'appointmentTime');
+                reset('vehicalid','description', 'serviceType', 'appointmentDate', 'appointmentTime');
                 setAvailableTimes([]); // Optionally reset available times
             } else {
                 toast.error('Failed to create appointment. Please try again.'); // Handle unexpected response
@@ -258,20 +260,33 @@ export default function CreateAppointment() {
             <ToastContainer position="top-right" autoClose={5000} />
 
             <form onSubmit={submit} className="max-w-md mx-auto mt-8">
-                
-
+                {/* adding vehicalid */}
                 <div className="mt-4">
-                    <InputLabel htmlFor="appointmentStatus" value="Appointment Status" />
+                    <InputLabel htmlFor="vehicalid" value="Vehicle Id" />
                     <TextInput
-                        id="appointmentStatus"
-                        name="appointmentStatus"
-                        value={data.appointmentStatus}
+                        id="vehicalid"
+                        name="vehicalid"
+                        value={data.vehicalid}
                         className="mt-1 block w-full"
-                        autoComplete="appointmentStatus"
-                        onChange={(e) => setData('appointmentStatus', e.target.value)}
+                        autoComplete="vehicalid"
+                        onChange={(e) => setData('vehicalid', e.target.value)}
                         required
                     />
-                    <InputError message={errors.appointmentStatus} className="mt-2" />
+                    <InputError message={errors.vehicalid} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="description" value="Description" />
+                    <TextInput
+                        id="description"
+                        name="description"
+                        value={data.description}
+                        className="mt-1 block w-full"
+                        autoComplete="description"
+                        onChange={(e) => setData('description', e.target.value)}
+                       
+                    />
+                    <InputError message={errors.description} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -324,8 +339,6 @@ export default function CreateAppointment() {
                     </div>
                     <InputError message={errors.appointmentDate} className="mt-2" />
                 </div>
-
-
 
                 <div className="mt-4">
                     <InputLabel htmlFor="appointmentTime" value="Appointment Time" />
