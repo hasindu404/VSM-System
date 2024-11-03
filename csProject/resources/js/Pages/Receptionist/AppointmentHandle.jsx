@@ -107,11 +107,36 @@ export default function Dashboard() {
             )
         );
 
+        // Send an email if the status is finished
+        // if (status === 'finished') {
+        //     await sendEmailNotification(id);
+        // }
+
         console.log('Status updated successfully');
     } catch (error) {
         console.error('Error updating status:', error);
     }
 };
+
+// const sendEmailNotification = async (appointmentId) => {
+//     try {
+//         const response = await fetch(`/api/send-email`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({ appointmentId }), // Send appointment ID to the email API
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Failed to send email');
+//         }
+
+//         console.log('Email sent successfully');
+//     } catch (error) {
+//         console.error('Error sending email:', error);
+//     }
+// };
 
     return (
         <div className="dashboard-container flex justify-center"> 
