@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import '@/Pages/Customer/Sidebar.css';
-import { FaTachometerAlt, FaCalendarCheck, FaFileInvoiceDollar } from 'react-icons/fa';
+import { FaTachometerAlt, FaCalendarCheck, FaFileInvoiceDollar,FaSignOutAlt } from 'react-icons/fa';
+
 
 export default function ReceptionistSidebar() {
     return (
@@ -14,7 +15,7 @@ export default function ReceptionistSidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="C:\Users\HP\Documents\GitHub\VSM-System\csProject\resources\js\Pages\Receptionist\AppointmentHandle.jsx" className="nav-link">
+                    <Link href="AppointmentHandle" className="nav-link">
                         <FaCalendarCheck style={{ color: 'green', fontSize: '20px', marginRight: '8px' }} />
                         Appointment Handling
                     </Link>
@@ -23,6 +24,12 @@ export default function ReceptionistSidebar() {
                     <Link href="/billing" className="nav-link">
                         <FaFileInvoiceDollar style={{ color: 'blue', fontSize: '20px', marginRight: '8px' }} />
                         Billing
+                    </Link>
+                </li>
+                <li>
+                    <Link href={route('logout')} method="post" as="button" className="nav-link">
+                        <FaSignOutAlt style={{ color: 'red', fontSize: '20px', marginRight: '8px' }} />
+                        Logout
                     </Link>
                 </li>
             </ul>
