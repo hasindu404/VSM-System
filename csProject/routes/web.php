@@ -88,6 +88,10 @@ Route::get('/create', function () {
     return Inertia::render('Appointments/Create'); // Ensure the casing matches
 })->name('create');
 
+Route::get('/viewappointments', function () {
+    return Inertia::render('Appointments/viewappointments'); // Ensure the casing matches
+})->name('viewappointments');
+
 Route::get('/personal', function () {
     return Inertia::render('Customer/Personalinfo'); // Ensure the casing matches
 })->name('profile');
@@ -118,13 +122,11 @@ Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTime
 Route::get('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'show']);
 Route::get('/closed-days', [BusinessHourController::class, 'getClosedDays'])->name('closed-days');
 Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name('appointmenthandle');
-Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
+// Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
+Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
+Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomerAppointments'])->name('viewappointmentss');
 
-
-
-
-
-
+    
 //feedback
 Route::get('/feedbacksub',function(){
     return Inertia::render('Customer/Feedback');

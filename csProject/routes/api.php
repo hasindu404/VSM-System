@@ -15,3 +15,7 @@ Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name(
 Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
 Route::put('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'update'])->name('business.hours.update');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
+Route::get('/viewappointments', [AppointmentController::class, 'index'])->name('viewappointments');
+Route::middleware('auth')
+    ->get('/viewappointments', [AppointmentController::class, 'displayCustomerAppointments'])
+    ->name('viewappointments');
