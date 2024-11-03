@@ -33,6 +33,8 @@ export default function CreateAppointment() {
     const [availableTimes, setAvailableTimes] = useState([]); // **New state for available time slots**
     const [bookedTimes, setBookedTimes] = useState([]); // **New state for booked times**
     const [closedDays, setClosedDays] = useState([]); // New state for closed days
+    const [vehicalIds, setVehicalIds] = useState([]); // **New state for vehical IDs**
+    
 
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
@@ -51,7 +53,7 @@ export default function CreateAppointment() {
     useEffect(() => {
         const fetchClosedDays = async () => {
             try {
-                // const response = await axios.get(`/closed-days`);
+                
                 const response = await axios.get(`/closed-days`); 
                 console.log('Full response:', response.data); 
                 // setClosedDays(response.data.closed_days);
@@ -133,6 +135,26 @@ export default function CreateAppointment() {
         }
     };
 
+    useEffect(() => {
+        const fetchVehicalIds = async () => {
+            const response = await axios.get(`/vehical-ids`);
+            setVehicalIds(response.data);
+        };
+        fetchVehicalIds();
+    }, []);
+
+    // const FetchVehicalIds = () => {
+    //     const [vehicalIds, setVehicalIds] = useState([]);
+    
+    //     useEffect(() => {
+    //         const fetchVehicalIds = async () => {
+    //             const response = await axios.get('/getVehicalIds');
+    //             setVehicalIds(response.data);
+    //         };
+            
+    //         fetchVehicalIds();
+    //     }, []);
+    
     
     
     // **Generate available time slots based on business hours and step**
@@ -258,23 +280,31 @@ export default function CreateAppointment() {
             <Sidebar />
             <Head title="Create Appointment" />
             <ToastContainer position="top-right" autoClose={5000} />
-
-            <form onSubmit={submit} className="max-w-md mx-auto mt-8">
+        
+            
+                <form onSubmit={submit} className="max-w-md mx-auto mt-8">
+                <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Appointments</h1>
                 {/* adding vehicalid */}
                 <div className="mt-4">
                     <InputLabel htmlFor="vehicalid" value="Vehicle Id" />
-                    <TextInput
-                        id="vehicalid"
-                        name="vehicalid"
-                        value={data.vehicalid}
-                        className="mt-1 block w-full"
-                        autoComplete="vehicalid"
-                        onChange={(e) => setData('vehicalid', e.target.value)}
-                        required
-                    />
+                  
+                        <select
+                            id="vehicalid"
+                            name="vehicalid"
+                            value={data.vehicalid}
+                            className="mt-1 block w-full"
+                            autoComplete="vehicalid"
+                            onChange={(e) => setData('vehicalid', e.target.value)}
+                            required
+                        >
+                            <option value="">Select a Vehicle ID</option>
+                                {vehicalIds.map((id) => (
+                                    <option key={id} value={id}>{id}</option>
+                                ))}
+                        </select>
                     <InputError message={errors.vehicalid} className="mt-2" />
                 </div>
-
+                  
                 <div className="mt-4">
                     <InputLabel htmlFor="description" value="Description" />
                     <TextInput
@@ -363,7 +393,9 @@ export default function CreateAppointment() {
                         {processing ? 'Creating...' : 'Create Appointment'}
                     </PrimaryButton>
                 </div>
+                
             </form>
         </GuestLayout>
+        
     );
 }
