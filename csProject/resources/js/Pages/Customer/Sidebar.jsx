@@ -39,7 +39,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/feedback" className="nav-link"> {/* New Feedback link */}
+                    <Link href="/feedbacksub" className="nav-link"> {/* New Feedback link */}
                         <FaCommentDots style={{ color: 'teal', fontSize: '20px', marginRight: '8px' }} /> {/* Feedback icon */}
                         Feedback
                     </Link>

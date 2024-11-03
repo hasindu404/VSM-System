@@ -1,7 +1,7 @@
 .sidebar {
     width: 250px;
     height: calc(100vh - 80px);
-    background-color: #333;
+    background-color: #040404;
     position: fixed;
     top: 80px;
     left: 0;
@@ -27,5 +27,5 @@
 }
 
 .sidebar ul li .nav-link:hover {
-    background-color: #575757;
+    background-color: #040404;
 }
