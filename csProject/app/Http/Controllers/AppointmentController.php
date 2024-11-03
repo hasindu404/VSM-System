@@ -21,7 +21,8 @@ class AppointmentController extends Controller
 
         // Validate the request data first
         $validatedData = $request->validate([
-            'appointmentStatus' => 'required|string',
+            'vehicalid' => 'required|string',
+            'description' => 'required|string',
             'serviceType' => 'required|string',
             'appointmentDate' => 'required|date',
             'appointmentTime' => 'required|string', // Initial validation
@@ -160,6 +161,21 @@ public function updateStatus(Request $request, $id)
 
     // Mail::to($appointment->customer->email)->send(new AppointmentStatusUpdated($appointment));
     return response()->json(['message' => 'Appointment status updated successfully'], 200);
+}
+
+public function displayCustomerAppointments(Request $request)
+{
+    // Get logged-in customer ID
+    $customerID = auth()->id();
+    
+
+    // Get all appointments for the customer
+    $appointments = Appointment::where('customerID', $customerID)
+        ->orderBy('appointmentDate', 'asc')
+        ->orderBy('appointmentTime', 'asc')
+        ->get();
+
+    return response()->json(['appointments' => $appointments]);
 }
 
 
