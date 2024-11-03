@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import './Sidebar.css';
-import {  FaCar, FaCalendarAlt, FaHistory, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import {  FaCar, FaCalendarAlt, FaHistory, FaBell, FaCog, FaSignOutAlt, FaClipboardList  } from 'react-icons/fa';
 import { FaCommentDots } from 'react-icons/fa';
 
 export default function Sidebar() {
@@ -17,7 +17,13 @@ export default function Sidebar() {
                 <li>
                     <Link href="/create" className="nav-link">
                         <FaCalendarAlt style={{ color: 'green', fontSize: '20px', marginRight: '8px' }} />
-                        Appointments
+                        Add Appointments
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/viewappointments" className="nav-link"> {/* New View Appointments link */}
+                        <FaClipboardList style={{ color: 'orange', fontSize: '20px', marginRight: '8px' }} />
+                        View Appointments
                     </Link>
                 </li>
                 <li>
