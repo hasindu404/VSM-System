@@ -162,7 +162,8 @@ export default function Dashboard() {
                             <TableHeader>
                               <TableRow>
                                 <TableHead>Customer ID</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead>Vehicle ID</TableHead>
+                                <TableHead>description</TableHead>
                                 <TableHead>Service Type</TableHead>
                                 <TableHead>AppointmentDate</TableHead>
                                 <TableHead>Time</TableHead>
@@ -173,7 +174,8 @@ export default function Dashboard() {
                               {filteredAppointments.map((appointment) => (
                                 <TableRow key={appointment.id}>
                                   <TableCell>{appointment.customerID}</TableCell>
-                                  <TableCell>{appointment.appointmentStatus}</TableCell>
+                                  <TableCell>{appointment.vehicalid}</TableCell>
+                                  <TableCell>{appointment.description}</TableCell>
                                   <TableCell>{appointment.serviceType}</TableCell>
                                   <TableCell>{appointment.appointmentDate}</TableCell>
                                   <TableCell>{appointment.appointmentTime}</TableCell>
