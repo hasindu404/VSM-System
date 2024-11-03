@@ -12,6 +12,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -33,6 +34,7 @@ Route::post('/customer',[CustomerController::class, 'store'])->name('customer.st
 
 Route::get('/vehical',[VehicalController::class,'index'])->name('vehical.index');
 Route::post('/vehical',[VehicalController::class, 'store'])->name('vehical.store');
+Route::get('/vehical-ids', [VehicalController::class, 'getVehicalIds'])->name('vehical-ids');
 
 
 Route::middleware('auth')->group(function () {
@@ -125,7 +127,7 @@ Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name(
 // Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
 Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomerAppointments'])->name('viewappointmentss');
-
+// Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
     
 //feedback
 Route::get('/feedbacksub',function(){
@@ -133,4 +135,6 @@ Route::get('/feedbacksub',function(){
 })->name('feedbacksub');
 Route::post('/feedback', [FeedbackController::class,'store'])->name('feedback.store');
 
+//Dashboards
+Route::get('/dashboard/stats', [DashboardController::class, 'getDashboardStats'])->name('dashboard.stats');
 

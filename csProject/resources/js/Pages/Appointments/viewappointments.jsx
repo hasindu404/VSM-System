@@ -68,7 +68,7 @@ import axios from 'axios';
                         height: 'calc(100vh - 100px)',
                     }}>
                     <div className="container mx-auto px-6 py-8">
-                        <h1 className="text-2xl font-semibold text-gray-900 mb-6">View Your Appointments</h1>
+                        <h1 className="text-2xl font-semibold text-gray-900 mb-6 justify:center">View Your Appointments</h1>
 
                         {/* Appointments table */}
                         <div className="bg-white shadow-md rounded-lg overflow-hidden">
