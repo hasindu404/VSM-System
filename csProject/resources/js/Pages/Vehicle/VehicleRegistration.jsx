@@ -36,7 +36,7 @@ export default function VehicleRegistration(){
                 <Sidebar/>
                 <Head title="Vehicle Registration"/>
                 <ToastContainer position="top-right" autoClose={5000}/>
-                <h2>Vehicle Registration</h2>
+                <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Vehicle Registration</h1>
                 <form onSubmit={submit} className="max-2-md mx-auto mt-8">
                     <div>
                         <InputLabel htmlFor="vehicalid" value="Vehicle Id"/>

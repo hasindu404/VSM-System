@@ -13,7 +13,8 @@ class Appointment extends Model
 
     protected $fillable =[
         'customerID',
-        'appointmentStatus',
+        'vehicalid',
+        'description',
         'serviceType',
         'appointmentDate',
         'employerType',

@@ -19,4 +19,9 @@ class Vehical extends Model
         'colour',
         'images',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

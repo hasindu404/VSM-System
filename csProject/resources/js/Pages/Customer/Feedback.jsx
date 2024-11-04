@@ -32,7 +32,7 @@ export default function Feedback(){
             <Sidebar/>
                 <Head title="Feedback"/>
                 <ToastContainer position="top-right" autoClose={5000}/>
-                <h3>Feedback</h3>
+                <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Feedback</h1>
                 <form onSubmit={submit} className="max-2-md mx-auto mt-8">
                 <div className="mt-4">
                     <InputLabel htmlFor="servicedate" value="Service Date"/>

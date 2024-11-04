@@ -1,5 +1,5 @@
 .header {
-    background-color: #042338; /* Change this to your desired color */
+    background-color:#040404; /* Change this to your desired color */
     height: 100px; /* Set the desired height */
     width: 100%;
     position: fixed;
@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     padding: 0 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    box-shadow: 0 2px 4px #040404; /* Optional shadow */
     z-index: 1000;
 }
   

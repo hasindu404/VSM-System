@@ -55,4 +55,27 @@ public function delete(Vehical $vehical){
     $vehical->delete();
     return redirect(route('vehical.vehimang'));
 }
+
+// public function getVehicalIds(Request $request)
+// {
+//     $userId = $request->user()->id; // Get the currently authenticated user's ID
+//     $vehicals = Vehical::where('user_id', $userId)->get(['vehicalid']); // Get all vehical IDs for this user
+
+//     return response()->json($vehicals);
+// }
+
+public function getVehicalIds(Request $request)
+{
+    try {
+        $userId = $request->user()->id; // Ensure user is authenticated
+        $vehicals = Vehical::where('user_id', $userId)->get(['vehicalid']); // Query for vehicle IDs
+
+        return response()->json($vehicals); // Return response as JSON
+    } catch (\Exception $e) {
+        // Log the exception and return a JSON error response
+        \Log::error('Error fetching vehicle IDs: ' . $e->getMessage());
+        return response()->json(['error' => 'An error occurred while fetching vehicle IDs.'], 500);
+    }
+}
+
 }
