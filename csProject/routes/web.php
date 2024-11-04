@@ -135,22 +135,22 @@ Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name(
 Route::get('/usersub',function(){
     return Inertia::render('Admin/UserManagement');
 })->name('usersub');
-Route::post('/usersub',[CustomerController::class, 'store']);
+Route::post('/user',[CustomerController::class, 'store']);
 
 // Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
 Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomerAppointments'])->name('viewappointmentss');
 // Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
 
+
 Route::get('/feedback', [FeedbackController::class, 'viewFeedback'])->name('feedback');
     
+
 //feedback
 Route::get('/feedbacksub',function(){
     return Inertia::render('Customer/Feedback');
 })->name('feedbacksub');
-Route::post('/feedback', [FeedbackController::class,'store']);
-Route::post('/feedback',[FeedbackController::class, 'store'])->name('Feedback.store');
-
+Route::post('/feedback',[FeedbackController::class, 'store'])->name('feedback.store');
 
 //reciption
 Route::get('/ReceptionDashboard', function () {

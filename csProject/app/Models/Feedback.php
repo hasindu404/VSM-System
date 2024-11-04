@@ -15,6 +15,6 @@ class Feedback extends Model
         'userid',
         'servicetype',
         'servicedate',
-        'discription'
+        'description'
     ];
 }

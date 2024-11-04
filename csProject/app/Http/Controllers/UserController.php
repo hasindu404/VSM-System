@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index(){
         $users = User::all();
-        return Inertia::render('Admin/AdminDashboard',['user'=>$users]);
+        return Inertia::render('Admin/UserManagement',['users'=>$users]);
     }
     public function store(Request $request){
 
