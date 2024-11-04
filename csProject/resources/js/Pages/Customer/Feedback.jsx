@@ -3,10 +3,12 @@ import { Head, Link, useForm } from "@inertiajs/react";
 import React from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
+import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Feedback(){
@@ -17,15 +19,47 @@ export default function Feedback(){
         description:''
     });
 
-    const submit = (e) =>{
+    // const submit = (e) =>{
+    //     e.preventDefault();
+    //         post(route('feedback.store'),{
+    //             onSuccess:()=>{
+    //                 onSuccess();
+    //                 setData({servicetype:'',servicedate:'',description:''})
+    //             }
+    //         })
+    // }
+
+    const submit = async (e) => {
         e.preventDefault();
-            post(route('feedback.store'),{
-                onSuccess:()=>{
-                    onSuccess();
-                    setData({servicetype:'',servicedate:'',description:''})
-                }
-            })
-    }
+
+       
+        try {
+           
+            const requestData = {
+                servicetype: data.servicetype,
+                servicedate: data.servicedate,
+                discription: data.discription,
+               
+            };
+        
+            console.log('Request data:', requestData); // Log the data being sent
+        
+            const response = await axios.post(`/feedback`, requestData);
+            console.log('Inertia Response:', response);
+            console.log(response.data.status);
+            if (response.data.status === 'success') {
+                toast.success(response.data.message); // Show success toast
+                setData({ servicetype: '', servicedate: '', discription: '' }); // Reset the form
+            } else {
+                toast.error('Failed to create appointment. Please try again.'); // Handle unexpected response
+            }
+        } catch (error) {
+            toast.error('Failed to create appointment. Please try again.'); // Show error toast
+            console.error('Error details:', error); // Log the error details
+        }
+    };
+
+
     return(
         <GuestLayout>
             <Header/>
@@ -63,17 +97,17 @@ export default function Feedback(){
                     </select>
                 </div>
                 <div className="mt-4">
-                    <InputLabel htmlFor="description" value="Description"/>
+                    <InputLabel htmlFor="discription" value="Description"/>
                     <textarea
                         rows={4}
                         cols={40}
-                        id="description"
+                        id="discription"
                         type="text"
-                        name="description"
-                        value={data.description}
+                        name="discription"
+                        value={data.discription}
                         className="mt-1 block w-full"
-                        autoComplete="description"
-                        onChange={(e)=>setData('description',e.target.value)}
+                        autoComplete="discription"
+                        onChange={(e)=>setData('discription',e.target.value)}
                         required
                     />
                 </div>

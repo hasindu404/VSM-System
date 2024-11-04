@@ -16,3 +16,4 @@ Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'
 Route::put('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'update'])->name('business.hours.update');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
 Route::get('/viewappointments', [AppointmentController::class, 'displayCustomerAppointments'])->name('viewappointments');
+Route::post('/feedback',[FeedbackController::class, 'store'])->name('feedback.store');

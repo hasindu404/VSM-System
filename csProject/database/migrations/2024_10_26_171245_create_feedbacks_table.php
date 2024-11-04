@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('userid');
             $table->string('servicetype');
             $table->date('servicedate');
-            $table->text('discription');
+            $table->string('discription');
             $table->timestamps();
         });
     }
