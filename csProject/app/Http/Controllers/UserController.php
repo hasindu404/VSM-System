@@ -21,5 +21,6 @@ class UserController extends Controller
             'password'=>'required',
         ]);
         $newUser = User::create($data);
+        return redirect(route('usersub'));
     }
 }

@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+use App\Mail\FirstMail;
+use Illuminate\Container\Attributes\Log;
+use Illuminate\Support\Facades\Log as FacadesLog;
+use Illuminate\Support\Facades\Mail;
+
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -22,6 +28,12 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::post('/send-mail', function(Request $request){
+    $email = $request->input('email');
+    FacadesLog::info($email);
+    Mail::to($email)->send(new FirstMail());
 });
 
 Route::get('/dashboard', function () {
@@ -135,7 +147,7 @@ Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name(
 Route::get('/usersub',function(){
     return Inertia::render('Admin/UserManagement');
 })->name('usersub');
-Route::post('/user',[CustomerController::class, 'store']);
+Route::post('/user',[UserController::class, 'store'])->name('user.store');
 
 // Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
@@ -144,7 +156,7 @@ Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomer
 
 
 Route::get('/feedback', [FeedbackController::class, 'viewFeedback'])->name('feedback');
-    
+
 
 //feedback
 Route::get('/feedbacksub',function(){
@@ -160,4 +172,7 @@ Route::get('/ReceptionDashboard', function () {
 //Dashboards
 Route::get('/dashboard/stats', [DashboardController::class, 'getDashboardStats'])->name('dashboard.stats');
 
+Route::get('/mailtest', function () {
+    return Inertia::render('Mail/firstmail'); // Ensure the casing matches
+})->name('mailtest');
 
