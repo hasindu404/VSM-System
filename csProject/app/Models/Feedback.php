@@ -14,6 +14,6 @@ class Feedback extends Model
     protected $fillable = [
         'servicetype',
         'servicedate',
-        'discription'
+        'description'
     ];
 }
