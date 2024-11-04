@@ -19,7 +19,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateAppointment() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        appointmentStatus: '',
+        vehicalid: '',
+        description: '',
         serviceType: '',
         appointmentDate: '',
         employerType: 'Customer',
@@ -32,6 +33,8 @@ export default function CreateAppointment() {
     const [availableTimes, setAvailableTimes] = useState([]); // **New state for available time slots**
     const [bookedTimes, setBookedTimes] = useState([]); // **New state for booked times**
     const [closedDays, setClosedDays] = useState([]); // New state for closed days
+    const [vehicalIds, setVehicalIds] = useState([]); // **New state for vehical IDs**
+    
 
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
@@ -50,7 +53,7 @@ export default function CreateAppointment() {
     useEffect(() => {
         const fetchClosedDays = async () => {
             try {
-                // const response = await axios.get(`/closed-days`);
+                
                 const response = await axios.get(`/closed-days`); 
                 console.log('Full response:', response.data); 
                 // setClosedDays(response.data.closed_days);
@@ -132,6 +135,26 @@ export default function CreateAppointment() {
         }
     };
 
+    useEffect(() => {
+        const fetchVehicalIds = async () => {
+            const response = await axios.get(`/vehical-ids`);
+            setVehicalIds(response.data);
+        };
+        fetchVehicalIds();
+    }, []);
+
+    // const FetchVehicalIds = () => {
+    //     const [vehicalIds, setVehicalIds] = useState([]);
+    
+    //     useEffect(() => {
+    //         const fetchVehicalIds = async () => {
+    //             const response = await axios.get('/getVehicalIds');
+    //             setVehicalIds(response.data);
+    //         };
+            
+    //         fetchVehicalIds();
+    //     }, []);
+    
     
     
     // **Generate available time slots based on business hours and step**
@@ -225,7 +248,8 @@ export default function CreateAppointment() {
         try {
            
             const requestData = {
-                appointmentStatus: data.appointmentStatus,
+                vehicalid: data.vehicalid,
+                description: data.description,
                 serviceType: data.serviceType,
                 appointmentDate: data.appointmentDate,
                 appointmentTime: data.appointmentTime,
@@ -238,7 +262,7 @@ export default function CreateAppointment() {
 
             if (response.data.status === 'success') {
                 toast.success(response.data.message); // Show success toast
-                reset('appointmentStatus', 'serviceType', 'appointmentDate', 'appointmentTime');
+                reset('vehicalid','description', 'serviceType', 'appointmentDate', 'appointmentTime');
                 setAvailableTimes([]); // Optionally reset available times
             } else {
                 toast.error('Failed to create appointment. Please try again.'); // Handle unexpected response
@@ -256,22 +280,43 @@ export default function CreateAppointment() {
             <Sidebar />
             <Head title="Create Appointment" />
             <ToastContainer position="top-right" autoClose={5000} />
-
-            <form onSubmit={submit} className="max-w-md mx-auto mt-8">
-                
-
+        
+            
+                <form onSubmit={submit} className="max-w-md mx-auto mt-8">
+                <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Appointments</h1>
+                {/* adding vehicalid */}
                 <div className="mt-4">
-                    <InputLabel htmlFor="appointmentStatus" value="Appointment Status" />
+                    <InputLabel htmlFor="vehicalid" value="Vehicle Id" />
+                  
+                        <select
+                            id="vehicalid"
+                            name="vehicalid"
+                            value={data.vehicalid}
+                            className="mt-1 block w-full"
+                            autoComplete="vehicalid"
+                            onChange={(e) => setData('vehicalid', e.target.value)}
+                            required
+                        >
+                            <option value="">Select a Vehicle ID</option>
+                                {vehicalIds.map((id) => (
+                                    <option key={id} value={id}>{id}</option>
+                                ))}
+                        </select>
+                    <InputError message={errors.vehicalid} className="mt-2" />
+                </div>
+                  
+                <div className="mt-4">
+                    <InputLabel htmlFor="description" value="Description" />
                     <TextInput
-                        id="appointmentStatus"
-                        name="appointmentStatus"
-                        value={data.appointmentStatus}
+                        id="description"
+                        name="description"
+                        value={data.description}
                         className="mt-1 block w-full"
-                        autoComplete="appointmentStatus"
-                        onChange={(e) => setData('appointmentStatus', e.target.value)}
-                        required
+                        autoComplete="description"
+                        onChange={(e) => setData('description', e.target.value)}
+                       
                     />
-                    <InputError message={errors.appointmentStatus} className="mt-2" />
+                    <InputError message={errors.description} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -325,8 +370,6 @@ export default function CreateAppointment() {
                     <InputError message={errors.appointmentDate} className="mt-2" />
                 </div>
 
-
-
                 <div className="mt-4">
                     <InputLabel htmlFor="appointmentTime" value="Appointment Time" />
                     <select
@@ -350,7 +393,9 @@ export default function CreateAppointment() {
                         {processing ? 'Creating...' : 'Create Appointment'}
                     </PrimaryButton>
                 </div>
+                
             </form>
         </GuestLayout>
+        
     );
 }

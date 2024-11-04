@@ -34,7 +34,7 @@ export default function Personalinfo(){
                 <Sidebar/>
                     <Head title="Personal information"/>
                     <ToastContainer position="top-right" autoClose={5000}/>
-                    <h4>Personal Information</h4>
+                    <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Personal Information</h1>
                     <form onSubmit={submit} className="max-2-md mx-auto mt-8">
                         <div>
                             <InputLabel htmlFor="fname" value="First Name"/>

@@ -107,11 +107,36 @@ export default function Dashboard() {
             )
         );
 
+        // Send an email if the status is finished
+        // if (status === 'finished') {
+        //     await sendEmailNotification(id);
+        // }
+
         console.log('Status updated successfully');
     } catch (error) {
         console.error('Error updating status:', error);
     }
 };
+
+// const sendEmailNotification = async (appointmentId) => {
+//     try {
+//         const response = await fetch(`/api/send-email`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({ appointmentId }), // Send appointment ID to the email API
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Failed to send email');
+//         }
+
+//         console.log('Email sent successfully');
+//     } catch (error) {
+//         console.error('Error sending email:', error);
+//     }
+// };
 
     return (
         <div className="dashboard-container flex justify-center"> 
@@ -129,7 +154,7 @@ export default function Dashboard() {
                       
                    }}>
                     <div className="container mx-auto px-6 py-8">
-                        <h1 className="text-2xl font-semibold text-gray-900 mb-6">Receptionist Dashboard</h1>
+                        <h1 className="text-2xl font-semibold text-gray-900 mb-6">Appointment Handling</h1>
 
                         {/* Date selection buttons */}
                         <div className="flex space-x-4 mb-6">
@@ -162,7 +187,8 @@ export default function Dashboard() {
                             <TableHeader>
                               <TableRow>
                                 <TableHead>Customer ID</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead>Vehicle ID</TableHead>
+                                <TableHead>description</TableHead>
                                 <TableHead>Service Type</TableHead>
                                 <TableHead>AppointmentDate</TableHead>
                                 <TableHead>Time</TableHead>
@@ -173,7 +199,8 @@ export default function Dashboard() {
                               {filteredAppointments.map((appointment) => (
                                 <TableRow key={appointment.id}>
                                   <TableCell>{appointment.customerID}</TableCell>
-                                  <TableCell>{appointment.appointmentStatus}</TableCell>
+                                  <TableCell>{appointment.vehicalid}</TableCell>
+                                  <TableCell>{appointment.description}</TableCell>
                                   <TableCell>{appointment.serviceType}</TableCell>
                                   <TableCell>{appointment.appointmentDate}</TableCell>
                                   <TableCell>{appointment.appointmentTime}</TableCell>
