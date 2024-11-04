@@ -14,7 +14,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href={route('UserManagement')} className="nav-link">
+                    <Link href={route('usersub')} className="nav-link">
                         <FaUser style={{ color: 'blue', fontSize: '20px', marginRight: '8px' }} />
                         User Management
                     </Link>

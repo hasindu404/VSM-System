@@ -7,6 +7,7 @@ use App\Http\Controllers\VehicalController;
 use App\Http\Controllers\BusinessHourController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
+use App\Models\Feedback;
 use App\Models\Vehical;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -127,6 +128,7 @@ Route::get('/feedbacksub',function(){
     return Inertia::render('Customer/Feedback');
 })->name('feedbacksub');
 Route::post('/feedback', [FeedbackController::class,'store']);
+Route::post('/feedback',[FeedbackController::class, 'store'])->name('Feedback.store');
 
 //reciption
 Route::get('/ReceptionDashboard', function () {
