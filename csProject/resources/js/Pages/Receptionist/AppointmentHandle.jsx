@@ -154,7 +154,7 @@ export default function Dashboard() {
                       
                    }}>
                     <div className="container mx-auto px-6 py-8">
-                        <h1 className="text-2xl font-semibold text-gray-900 mb-6">Appointment Handling</h1>
+                        <h1 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Appointment Handling</h1>
 
                         {/* Date selection buttons */}
                         <div className="flex space-x-4 mb-6">
@@ -193,6 +193,7 @@ export default function Dashboard() {
                                 <TableHead>AppointmentDate</TableHead>
                                 <TableHead>Time</TableHead>
                                 <TableHead>isFinished</TableHead>
+                                <TableHead>Sending Email</TableHead>
                               </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -216,6 +217,16 @@ export default function Dashboard() {
                                        <option value="notFinished">Not Finished</option>
                                        <option value="finished">Finished</option>
                                     </select>
+                                </TableCell>
+                                <TableCell>
+                                    <button
+                                        onClick={async () => {
+                                            await handleSendEmail(appointment.id); // Call your email sending function
+                                        }}
+                                        className="p-4 w-32 bg-black text-white rounded-md"
+                                    >
+                                        Send
+                                    </button>
                                 </TableCell>
                                 </TableRow>
                               ))}
