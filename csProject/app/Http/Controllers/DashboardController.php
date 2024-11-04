@@ -17,6 +17,7 @@ class DashboardController extends Controller
 
             log:info( $feedbacksCount);
 
+            
             return response()->json([
                 'appointments' => $appointmentsCount,
                 'users' => $usersCount,

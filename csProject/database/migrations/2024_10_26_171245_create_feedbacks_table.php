@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
+            $table->string('userid');
             $table->string('servicetype');
             $table->date('servicedate');
-            $table->text('discription');
+            $table->string('discription');
             $table->timestamps();
         });
     }

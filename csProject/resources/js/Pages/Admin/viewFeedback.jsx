@@ -41,7 +41,7 @@ import {
                 <Aheader />
 
                 <main className="bg-gray-100 mt-4 rounded-lg shadow-lg p-6 mx-auto max-w-screen-lg">
-                    <h1 className="text-2xl font-semibold text-gray-900 text-center mb-6">Appointment Handling</h1>
+                    <h1 className="text-2xl font-semibold text-gray-900 text-center mb-6">Customer Feedbacks</h1>
 
                     <div className="overflow-x-auto bg-white shadow-md rounded-lg">
                         <Table className="w-full">

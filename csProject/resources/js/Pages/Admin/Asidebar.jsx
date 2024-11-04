@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import '@/Pages/Customer/Sidebar.css';
-import { FaUser, FaClipboardList, FaCommentDots, FaSignOutAlt, FaClock } from 'react-icons/fa'; // Import the clock icon
+import { FaUser, FaClipboardList, FaCommentDots, FaSignOutAlt, FaClock, FaEye  } from 'react-icons/fa'; // Import the clock icon
 
 export default function Sidebar() {
     return (
@@ -24,8 +24,7 @@ export default function Sidebar() {
                         <FaClock style={{ color: 'orange', fontSize: '20px', marginRight: '8px' }} />
                         Business Hours
                     </Link>
-                </li>
-                <li>
+                
                     <Link href="/viewFeedback" className="nav-link">
                         <FaCommentDots style={{ color: 'green', fontSize: '20px', marginRight: '8px' }} />
                         Feedback

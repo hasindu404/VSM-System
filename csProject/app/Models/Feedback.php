@@ -12,8 +12,9 @@ class Feedback extends Model
     protected $table = 'feedbacks';
 
     protected $fillable = [
+        'userid',
         'servicetype',
         'servicedate',
-        'description'
+        'discription'
     ];
 }
