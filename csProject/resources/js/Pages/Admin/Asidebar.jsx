@@ -26,7 +26,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/feedback" className="nav-link">
+                    <Link href="/viewFeedback" className="nav-link">
                         <FaCommentDots style={{ color: 'green', fontSize: '20px', marginRight: '8px' }} />
                         Feedback
                     </Link>
