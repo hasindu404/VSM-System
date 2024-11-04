@@ -21,7 +21,7 @@ export default function Dashboard() {
 
     const submit =(e)=>{
         e.preventDefault();
-            post(route('Feedback.store'),{
+            post(route('user.store'),{
                 onSuccess:()=>{
                     onSuccess();
                     setData({name:'',email:'',userType:'',password:''})
@@ -72,8 +72,8 @@ export default function Dashboard() {
                             required
                         >
                             <option value="">Select a User Type</option>
-                            <option value="Recpition">Reciption
-                            </option>
+                            <option value="recpition">Reciption</option>
+                            <option value="customer">Customer</option>
                         </select>
                     </div>
                     <div>
