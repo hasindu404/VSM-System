@@ -81,6 +81,10 @@ Route::get('/BusinessHours', function () {
     return Inertia::render('Admin/BusinessHours'); // Ensure the casing matches
 })->name('BusinessHours');
 
+Route::get('/viewFeedback',function(){
+    return Inertia::render('Admin/viewFeedback');
+})->name('viewFeedback');
+
 //Customer
 Route::get('/CustomerDashboard', function () {
     return Inertia::render('Customer/CustomerDashboard'); // Ensure the casing matches
@@ -106,6 +110,9 @@ Route::get('/service',function(){
     return Inertia::render('Customer/ServiceHistory');
 })->name('service');
 
+
+
+
 //Receptionist
 Route::get('/AppointmentHandle',function(){
     return Inertia::render('Receptionist/AppointmentHandle');
@@ -128,6 +135,8 @@ Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name(
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
 Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomerAppointments'])->name('viewappointmentss');
 // Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
+
+Route::get('/feedback', [FeedbackController::class, 'viewFeedback'])->name('feedback');
     
 //feedback
 Route::get('/feedbacksub',function(){
