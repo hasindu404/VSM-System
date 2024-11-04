@@ -179,15 +179,7 @@ public function displayCustomerAppointments(Request $request)
 }
 
 
-// public function finish($id)
-// {
-//     Log::info("Finishing appointment with ID: $id");
-//     $appointment = Appointment::findOrFail($id);
-//     $appointment->isFinished = true; // Assuming this field exists
-//     $appointment->save();
 
-//     return response()->json(['success' => true]);
-// }
 
 
 }    
