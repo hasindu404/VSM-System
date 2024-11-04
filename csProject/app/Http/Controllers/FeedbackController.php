@@ -20,4 +20,15 @@ class FeedbackController extends Controller
         ]);
         $newFeedback = Feedback::create($data);
     }
+
+    public function viewFeedback()
+    {
+    // Retrieve all feedback entries
+    $feedbacks = Feedback::all();
+
+    // Return the feedback data as JSON
+    return response()->json($feedbacks);
+    }
+
+
 }
