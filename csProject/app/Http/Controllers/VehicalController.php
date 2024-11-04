@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Vehical;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class VehicalController extends Controller
 {
@@ -73,7 +74,7 @@ public function getVehicalIds(Request $request)
         return response()->json($vehicals); // Return response as JSON
     } catch (\Exception $e) {
         // Log the exception and return a JSON error response
-        \Log::error('Error fetching vehicle IDs: ' . $e->getMessage());
+        Log::error('Error fetching vehicle IDs: ' . $e->getMessage());
         return response()->json(['error' => 'An error occurred while fetching vehicle IDs.'], 500);
     }
 }
