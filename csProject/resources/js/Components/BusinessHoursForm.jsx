@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from '@inertiajs/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BusinessHoursForm() {
     const { data, setData, put, processing, errors, reset, recentlySuccessful } = useForm({
@@ -31,7 +33,10 @@ export default function BusinessHoursForm() {
     // Send the PUT request
     put(route('business.hours.update', { dayOfWeek: data.dayOfWeek }), {
         data: payload,
-        onSuccess: () => reset(), // Reset form or state on success
+        onSuccess: () => {
+            reset(),
+            toast.success('Business hours updated successfully!');
+        } // Reset form or state on success
     });
         // put(route('business.hours.update', { dayOfWeek: data.dayOfWeek }), {
         //     data: {
@@ -42,6 +47,32 @@ export default function BusinessHoursForm() {
         //     },
         //     onSuccess: () => reset(),
         // });
+
+    //     try {
+           
+    //         const requestData = {
+    //             servicetype: data.servicetype,
+    //             servicedate: data.servicedate,
+    //             discription: data.discription,
+               
+    //         };
+        
+    //         console.log('Request data:', requestData); // Log the data being sent
+        
+    //         const response = await axios.post(`/feedback`, requestData);
+    //         console.log('Inertia Response:', response);
+    //         console.log(response.data.status);
+    //         if (response.data.status === 'success') {
+    //             toast.success(response.data.message); // Show success toast
+    //             setData({ servicetype: '', servicedate: '', discription: '' }); // Reset the form
+    //         } else {
+    //             toast.error('Failed to create appointment. Please try again.'); // Handle unexpected response
+    //         }
+    //     } catch (error) {
+    //         toast.error('Failed to create appointment. Please try again.'); // Show error toast
+    //         console.error('Error details:', error); // Log the error details
+    //     }
+    // };
     };
 
     return (
@@ -151,6 +182,7 @@ export default function BusinessHoursForm() {
                     {processing ? 'Updating...' : 'Update Hours'}
                 </button>
             </form>
+            <ToastContainer /> {/* Include ToastContainer here */}
         </div>
     );
 }

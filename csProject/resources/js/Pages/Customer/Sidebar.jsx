@@ -26,18 +26,8 @@ export default function Sidebar() {
                         View Appointments
                     </Link>
                 </li>
-                <li>
-                    <Link href="/service" className="nav-link">
-                        <FaHistory style={{ color: 'purple', fontSize: '20px', marginRight: '8px' }} />
-                        Service History
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/reminders" className="nav-link">
-                        <FaBell style={{ color: 'orange', fontSize: '20px', marginRight: '8px' }} />
-                        Reminders
-                    </Link>
-                </li>
+                
+               
                 <li>
                     <Link href="/feedbacksub" className="nav-link"> {/* New Feedback link */}
                         <FaCommentDots style={{ color: 'teal', fontSize: '20px', marginRight: '8px' }} /> {/* Feedback icon */}

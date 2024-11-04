@@ -32,7 +32,12 @@ public function store(Request $request){
 
     $newVehical = Vehical::create($data);
 
-    return redirect(route('vehiclereg'));
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Appointment created successfully!'
+    ]);
+    // return redirect(route('vehiclereg'));
+     
 }
 
 public function edit(Vehical $vehical){
