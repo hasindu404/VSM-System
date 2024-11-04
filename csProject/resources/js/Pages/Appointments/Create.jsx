@@ -33,7 +33,7 @@ export default function CreateAppointment() {
     const [availableTimes, setAvailableTimes] = useState([]); // **New state for available time slots**
     const [bookedTimes, setBookedTimes] = useState([]); // **New state for booked times**
     const [closedDays, setClosedDays] = useState([]); // New state for closed days
-    const [vehicalIds, setVehicalIds] = useState([]); // **New state for vehical IDs**
+    // const [vehicalIds, setVehicalIds] = useState([]); // **New state for vehical IDs**
     
 
     useEffect(() => {
@@ -135,13 +135,13 @@ export default function CreateAppointment() {
         }
     };
 
-    useEffect(() => {
-        const fetchVehicalIds = async () => {
-            const response = await axios.get(`/vehical-ids`);
-            setVehicalIds(response.data);
-        };
-        fetchVehicalIds();
-    }, []);
+    // useEffect(() => {
+    //     const fetchVehicalIds = async () => {
+    //         const response = await axios.get(`/vehical-ids`);
+    //         setVehicalIds(response.data);
+    //     };
+    //     fetchVehicalIds();
+    // }, []);
 
     // const FetchVehicalIds = () => {
     //     const [vehicalIds, setVehicalIds] = useState([]);
@@ -286,9 +286,9 @@ export default function CreateAppointment() {
                 <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Appointments</h1>
                 {/* adding vehicalid */}
                 <div className="mt-4">
-                    <InputLabel htmlFor="vehicalid" value="Vehicle Id" />
-                  
-                        <select
+                        <InputLabel htmlFor="vehicalid" value="Vehicle Id" />
+                        <input
+                            type="text"
                             id="vehicalid"
                             name="vehicalid"
                             value={data.vehicalid}
@@ -296,14 +296,10 @@ export default function CreateAppointment() {
                             autoComplete="vehicalid"
                             onChange={(e) => setData('vehicalid', e.target.value)}
                             required
-                        >
-                            <option value="">Select a Vehicle ID</option>
-                                {vehicalIds.map((id) => (
-                                    <option key={id} value={id}>{id}</option>
-                                ))}
-                        </select>
-                    <InputError message={errors.vehicalid} className="mt-2" />
-                </div>
+                        />
+                        <InputError message={errors.vehicalid} className="mt-2" />
+                    </div>
+
                   
                 <div className="mt-4">
                     <InputLabel htmlFor="description" value="Description" />
