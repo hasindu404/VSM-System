@@ -38,8 +38,8 @@ class AuthenticatedSessionController extends Controller
         // Log::info('Authenticated user: ', $request->user()->toArray());
 
         //  // Set customerID in the session
-        // $customerID = $request->user()->id; 
-        // session(['customerID' => $request->user()->id]); 
+        // $customerID = $request->user()->id;
+        // session(['customerID' => $request->user()->id]);
         // Log::info('Customer ID set in session: ' . session('customerID'));
 
 
@@ -47,13 +47,15 @@ class AuthenticatedSessionController extends Controller
         // Log::info('Customer ID set in session after login: ' . $request->user()->id);
 
         $request->session()->regenerate();
-        if($request->user()->usertype === 'admin'){
+        if($request->user()->userType === 'admin'){
 
-            return redirect()->route('Admin.AdminDashboard');
+            return redirect()->route('AdminDashboard');
         }
+        if ($request->user()->userType === 'reciption') {
 
+            return redirect()->route('ReceptionDashboard');
+        }
         return redirect()->intended(route('CustomerDashboard'));
-
     }
 
     /**
@@ -70,5 +72,5 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    
+
 }

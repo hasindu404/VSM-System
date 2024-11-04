@@ -7,6 +7,7 @@ use App\Http\Controllers\VehicalController;
 use App\Http\Controllers\BusinessHourController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
+use App\Models\Feedback;
 use App\Models\Vehical;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -73,10 +74,6 @@ Route::get('/AdminDashboard', function () {
     return Inertia::render('Admin/AdminDashboard'); // Ensure the casing matches
 })->name('AdminDashboard');
 
-Route::get('/UserManagement', function () {
-    return Inertia::render('Admin/UserManagement'); // Ensure the casing matches
-})->name('UserManagement');
-
 Route::get('/BusinessHours', function () {
     return Inertia::render('Admin/BusinessHours'); // Ensure the casing matches
 })->name('BusinessHours');
@@ -124,6 +121,15 @@ Route::get('/booked-times/{date}', [AppointmentController::class, 'getBookedTime
 Route::get('/business-hours/{dayOfWeek}', [BusinessHourController::class, 'show']);
 Route::get('/closed-days', [BusinessHourController::class, 'getClosedDays'])->name('closed-days');
 Route::get('/appointmenthandle', [AppointmentController::class, 'index'])->name('appointmenthandle');
+
+
+
+//User Registration
+Route::get('/usersub',function(){
+    return Inertia::render('Admin/UserManagement');
+})->name('usersub');
+Route::post('/usersub',[CustomerController::class, 'store']);
+
 // Route::post('/appointments/{id}/finish', [AppointmentController::class, 'finish'])->name('finish');
 Route::put('/appointments/{id}', [AppointmentController::class, 'updateStatus'])->name('appointments.update');
 Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomerAppointments'])->name('viewappointmentss');
@@ -133,8 +139,16 @@ Route::get('/viewappointmentss', [AppointmentController::class, 'displayCustomer
 Route::get('/feedbacksub',function(){
     return Inertia::render('Customer/Feedback');
 })->name('feedbacksub');
-Route::post('/feedback', [FeedbackController::class,'store'])->name('feedback.store');
+Route::post('/feedback', [FeedbackController::class,'store']);
+Route::post('/feedback',[FeedbackController::class, 'store'])->name('Feedback.store');
+
+
+//reciption
+Route::get('/ReceptionDashboard', function () {
+    return Inertia::render('Receptionist/ReciptionDashboard'); // Ensure the casing matches
+})->middleware(['auth', 'verified'])->name('ReceptionDashboard');
 
 //Dashboards
 Route::get('/dashboard/stats', [DashboardController::class, 'getDashboardStats'])->name('dashboard.stats');
+
 
