@@ -175,4 +175,8 @@ Route::get('/dashboard/stats', [DashboardController::class, 'getDashboardStats']
 Route::get('/mailtest', function () {
     return Inertia::render('Mail/firstmail'); // Ensure the casing matches
 })->name('mailtest');
+//Mail
+Route::post('/send-mail',function(Request $request){
+    Mail::to('test@test.com')->send(new FirstMail());
+});
 
