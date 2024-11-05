@@ -37,7 +37,7 @@ class FirstMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.firdt-mail',
+            view: 'mails.first-mail',
         );
     }
 
