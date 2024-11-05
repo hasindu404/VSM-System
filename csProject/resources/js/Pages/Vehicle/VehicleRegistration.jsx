@@ -1,15 +1,21 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import { useForm } from '@inertiajs/inertia-react'
-import React from 'react'
+import axios from 'axios';
 import Header from '../Customer/Header';
 import Sidebar from '../Customer/Sidebar';
 import { Head, Link } from '@inertiajs/react';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast  } from 'react-toastify';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
+import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from 'react';
+
+
 
 export default function VehicleRegistration(){
+
+    // const [recentlySuccessful, setRecentlySuccessful] = useState(false); // State for success alert
 
     const {data, setData, post, processing } = useForm({
         vehicalid: '',
@@ -21,15 +27,58 @@ export default function VehicleRegistration(){
         images:''
     })
 
-    const submit = (e) =>{
+    // const submit = (e) =>{
+    //     e.preventDefault();
+    //         post(route('vehical.store'),{
+    //             onSuccess:() => {
+    //                 console.log("Vehicle registered successfully!");
+    //                 setRecentlySuccessful(true);
+    //                 toast.success('Vehicle registered successfully!'); // Show success toast
+    //                 // onSuccess();
+    //                 setData({vehicalid:'',brand:'',year:'',Catagory:'',last_service_date:'',colour:'',images:''});
+    //             },
+    //             onError: () => {
+    //                 toast.error('Failed to register vehicle. Please try again.'); // Show error toast
+    //             }
+    //         })
+    // };
+
+    const submit = async (e) => {
         e.preventDefault();
-            post(route('vehical.store'),{
-                onSuccess:()=>{
-                    onSuccess();
-                    setData({vehicalid:'',brand:'',year:'',Catagory:'',last_service_date:'',colour:'',images:''});
-                }
-            })
+
+       
+        try {
+           
+            const requestData = {
+                vehicalid: data.vehicalid,
+                brand: data.brand,
+                year: data.year,
+                Catagory: data.Catagory,
+                last_service_date: data.last_service_date,
+                colour: data.colour,
+                images: data.images,
+            };
+        
+            console.log('Request data:', requestData); // Log the data being sent
+        
+            const response = await axios.post(`/vehical`, requestData);
+            console.log('Inertia Response:', response);
+
+            if (response.data.status === 'success') {
+                console.log(response.data.status);
+                toast.success(response.data.message); // Show success toast
+                reset('vehicalid','brand', 'year', 'Catagory', 'last_service_date','colour','images');
+                setData([]); // Optionally reset available times
+            } else {
+                // toast.error('Failed to create appointment. Please try again.'); // Handle unexpected response
+            }
+        } catch (error) {
+            // toast.error('Failed to create appointment. Please try again.'); // Show error toast
+            // console.error('Error details:', error); // Log the error details
+        }
     };
+
+
         return(
             <GuestLayout>
                 <Header/>
@@ -38,6 +87,12 @@ export default function VehicleRegistration(){
                 <ToastContainer position="top-right" autoClose={5000}/>
                 <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Vehicle Registration</h1>
                 <form onSubmit={submit} className="max-2-md mx-auto mt-8">
+                    {/* Success Message */}
+                    {/* {recentlySuccessful && (
+                        <div className="alert success bg-green-100 text-green-800 p-4 rounded mb-4">
+                            Vehicle registered successfully!
+                        </div>
+                    )} */}
                     <div>
                         <InputLabel htmlFor="vehicalid" value="Vehicle Id"/>
                         <TextInput
